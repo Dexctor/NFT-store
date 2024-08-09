@@ -1,20 +1,18 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-// components/Navbar.js
-import { useState, useEffect } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,10 +22,29 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav
       className={`fixed w-full z-50 flex items-center justify-between px-10 py-2 transition-colors duration-300 ${
-        isScrolled ? "bg-black bg-opacity-70 backdrop-blur-sm text-white" : "bg-transparent text-gray-800"
+        isScrolled ? "bg-[#1D2144] bg-opacity-70 backdrop-blur-sm text-white" : "bg-transparent text-gray-800"
       }`}
     >
       {/* Logo and NFT Text */}
@@ -38,60 +55,97 @@ const Navbar = () => {
 
       {/* Navigation Menu */}
       <div className="flex items-center space-x-8">
-        <Link legacyBehavior href="/">
-          <a
-            className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
-            }`}
-          >
-            Home
-          </a>
+        <Link href="/" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+          Home
         </Link>
-        <Link legacyBehavior href="/explore">
-          <a
-            className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
-            }`}
-          >
-            Explore
-          </a>
+        <Link href="/explore" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+          Explore
         </Link>
-        <Link legacyBehavior href="/community">
-          <a
-            className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
-            }`}
-          >
-            Community
-          </a>
+        <Link href="/community" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+          Community
         </Link>
-        <div className="relative group">
+
+        {/* Dropdown Menu */}
+        <div
+          className="relative"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
           <button
-            className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
-            }`}
+            ref={buttonRef}
+            aria-expanded={dropdownOpen}
+            type="button"
+            className="flex items-center gap-2 bg-transparent text-white px-5 py-2.5 rounded-md"
           >
             Page
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
           </button>
-          <div className="absolute hidden group-hover:block bg-white shadow-lg mt-2">
-            <Link legacyBehavior href="/subpage1">
-              <a className="block px-4 py-2 text-black hover:bg-gray-100">
-                Subpage 1
-              </a>
+
+          <div
+            ref={panelRef}
+            className={`p-4 absolute left-0 mt-2 w-52 rounded-md bg-[#1d2144] shadow-md transition-opacity duration-300 ${
+              dropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <Link
+              href="/explore-items"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Explore items
             </Link>
-            <Link legacyBehavior href="/subpage2">
-              <a className="block px-4 py-2 text-black hover:bg-gray-100">
-                Subpage 2
-              </a>
+            <Link
+              href="/item-details"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Item Details
+            </Link>
+            <Link
+              href="/create-item"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Create item
+            </Link>
+            <Link
+              href="/connect-wallet"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Connect Wallet
+            </Link>
+            <Link
+              href="/support"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Support
+            </Link>
+            <hr className="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+            <Link
+              href="/signUp"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Sign Up Page
+            </Link>
+            <Link
+              href="/signIn"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+            >
+              Sign In Page
             </Link>
           </div>
         </div>
-        <Link legacyBehavior href="/support">
-          <a className={`${
-            isScrolled ? "text-white hover:text-gray-300" : "text-gray-500"
-          }`}>
-            Support
-          </a>
+
+        <Link href="/support" className={isScrolled ? "text-white hover:text-gray-300" : "text-gray-500"}>
+          Support
         </Link>
       </div>
 
@@ -103,9 +157,7 @@ const Navbar = () => {
             className="focus:outline-none"
           >
             <svg
-              className={`h-6 w-6 ${
-                isScrolled ? "text-white" : "text-white"
-              }`}
+              className={`h-6 w-6 ${isScrolled ? "text-white" : "text-white"}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -127,7 +179,7 @@ const Navbar = () => {
             />
           )}
         </div>
-        <button className="flex items-center space-x-2  border border-white rounded-lg px-4 py-2 hover:bg-gray-100">
+        <button className="flex items-center space-x-2 border border-white rounded-lg px-4 py-2 hover:bg-gray-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -143,7 +195,7 @@ const Navbar = () => {
             />
           </svg>
 
-          <span className={`${isScrolled ? "text-white" : "text-white"}`}>Wallet Connect</span>
+          <span className={isScrolled ? "text-white" : "text-white"}>Wallet Connect</span>
         </button>
       </div>
     </nav>

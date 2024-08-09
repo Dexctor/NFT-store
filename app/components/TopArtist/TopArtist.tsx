@@ -1,88 +1,58 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client';
-
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+"use client";
+import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 
 const TopArtists = () => {
   const artists = [
     {
       username: "@Devid_Miller",
       eth: "14.55 ETH",
-      imgSrc: "/images/devid_miller.jpg",
+      imgSrc: "/images/image-01.jpg",
     },
     {
       username: "@Elon_Mask",
       eth: "12.25 ETH",
-      imgSrc: "/images/elon_mask.jpg",
+      imgSrc: "/images/image-02.jpg",
     },
     {
       username: "@Hiliya_Farah",
       eth: "9.89 ETH",
-      imgSrc: "/images/hiliya_farah.jpg",
+      imgSrc: "/images/image-03.jpg",
     },
     {
       username: "@Wilium_Dev",
       eth: "2.09 ETH",
-      imgSrc: "/images/wilium_dev.jpg",
+      imgSrc: "/images/image-04.jpg",
     },
     {
       username: "@New_Artist1",
       eth: "1.50 ETH",
-      imgSrc: "/images/new_artist1.jpg",
+      imgSrc: "/images/image-01.jpg",
     },
     {
       username: "@New_Artist2",
       eth: "3.75 ETH",
-      imgSrc: "/images/new_artist2.jpg",
+      imgSrc: "/images/image-02.jpg",
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const artistListRef = useRef<HTMLDivElement>(null);
+  const [emblaRef, embla] = useEmblaCarousel({ loop: true });
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-    setIsTransitioning(true);
+    if (embla) embla.scrollNext();
   };
-  
+
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1);
-    setIsTransitioning(true);
+    if (embla) embla.scrollPrev();
   };
-
-  useEffect(() => {
-    if (currentIndex === artists.length) {
-      // Transition rapide pour réinitialiser à la première slide
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(0);
-      }, 500); // Correspond à la durée de la transition
-    } else if (currentIndex === -1) {
-      // Transition rapide pour aller à la dernière slide
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(artists.length - 1);
-      }, 500);
-    }
-  }, [currentIndex, artists.length]);
-
-  useEffect(() => {
-    if (artistListRef.current) {
-      artistListRef.current.style.transition = isTransitioning ? 'transform 0.5s' : 'none';
-      artistListRef.current.style.transform = `translateX(-${(currentIndex * 100) / artists.length}%)`;
-    }
-  }, [currentIndex, isTransitioning]);
 
   return (
-    <div className="mx-auto relative  bg-gradient-to-b from-[#10102a] to-[#10102a] p-8  overflow-hidden">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-white text-2xl font-bold">Top Artists</h2>
-        <div className="flex items-center space-x-2">
-       
+    <div className="mx-auto relative bg-[#0c0c24] px-12 py-8 overflow-hidden">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-white text-3xl font-bold">Top Artists</h2>
+        <div className="flex items-center space-x-4">
           <button
-            className="bg-gray-700 text-white rounded-full p-2 cursor-pointer"
+            className="bg-gray-700 text-white rounded-md p-2 cursor-pointer"
             onClick={prevSlide}
           >
             <svg
@@ -101,7 +71,7 @@ const TopArtists = () => {
             </svg>
           </button>
           <button
-            className="bg-gray-700 text-white rounded-full p-2 cursor-pointer"
+            className="bg-gray-700 text-white rounded-md p-2 cursor-pointer"
             onClick={nextSlide}
           >
             <svg
@@ -121,25 +91,28 @@ const TopArtists = () => {
           </button>
         </div>
       </div>
-      <div className="border-b border-gray-600 h-6"></div>
-      <div className="w-full overflow-hidden">
-        <div
-          ref={artistListRef}
-          className="flex"
-          style={{ width: `${artists.length * 100}%` }}
-        >
+      <div className="border-b border-gray-600 mb-6"></div>
+      <div className="w-full overflow-hidden" ref={emblaRef}>
+        <div className="flex space-x-4">
           {artists.map((artist, index) => (
-            <div key={index} className="w-2/2 p-2 flex-shrink-0">
-              <div className="bg-[#2b2b3c] p-4 rounded-lg flex flex-col items-center border border-[#3c3c4d] hover:border-gradient-to-r from-[#ff80b5] to-[#9089fc]">
-                <Image
-                  src={artist.imgSrc}
-                  alt={artist.username}
-                  width={80}
-                  height={80}
-                  className="rounded-lg mb-4"
-                />
-                <p className="text-white text-lg">{artist.username}</p>
-                <p className="text-[#00ff8b] text-lg">{artist.eth}</p>
+            <div key={index} className="w-1/4 p-2 flex-shrink-0">
+              <div className="bg-[#2C2C39] p-3 rounded-lg flex flex-col items-center border border-[#3c3c4d] hover:bg-gradient-to-r from-[#ebc77a] via-[#ca3f8d] to-[#5142fc]">
+                <div className="relative h-12 w-12 rounded-full overflow-hidden mb-4">
+                  <Image
+                    src={artist.imgSrc}
+                    alt={artist.username}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 
+                     (max-width: 1200px) 50vw, 
+                     33vw"
+                    style={{ objectFit: "cover", objectPosition: "center" }}
+                  />
+                </div>
+
+                <h3 className="text-md font-semibold text-white mb-1">
+                  {artist.username}
+                </h3>
+                <span className="text-[#36b37e] text-sm">{artist.eth}</span>
               </div>
             </div>
           ))}
