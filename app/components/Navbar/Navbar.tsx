@@ -32,8 +32,8 @@ const Navbar = () => {
     >
       {/* Logo and NFT Text */}
       <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="Logo" className="h-24 w-24" />
-        <span className="font-bold text-3xl">NFT</span>
+        <img src="/logo.png" alt="Logo" className="h-20 w-20" />
+        <span className="font-bold text-3xl text-white">NFT</span>
       </div>
 
       {/* Navigation Menu */}
@@ -41,7 +41,7 @@ const Navbar = () => {
         <Link legacyBehavior href="/">
           <a
             className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-gray-800 hover:text-gray-600"
+              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
             }`}
           >
             Home
@@ -50,7 +50,7 @@ const Navbar = () => {
         <Link legacyBehavior href="/explore">
           <a
             className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-gray-800 hover:text-gray-600"
+              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
             }`}
           >
             Explore
@@ -59,7 +59,7 @@ const Navbar = () => {
         <Link legacyBehavior href="/community">
           <a
             className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-gray-800 hover:text-gray-600"
+              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
             }`}
           >
             Community
@@ -68,19 +68,19 @@ const Navbar = () => {
         <div className="relative group">
           <button
             className={`${
-              isScrolled ? "text-white hover:text-gray-300" : "text-gray-800 hover:text-gray-600"
+              isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"
             }`}
           >
             Page
           </button>
           <div className="absolute hidden group-hover:block bg-white shadow-lg mt-2">
             <Link legacyBehavior href="/subpage1">
-              <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+              <a className="block px-4 py-2 text-black hover:bg-gray-100">
                 Subpage 1
               </a>
             </Link>
             <Link legacyBehavior href="/subpage2">
-              <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+              <a className="block px-4 py-2 text-black hover:bg-gray-100">
                 Subpage 2
               </a>
             </Link>
@@ -104,7 +104,7 @@ const Navbar = () => {
           >
             <svg
               className={`h-6 w-6 ${
-                isScrolled ? "text-white" : "text-gray-800"
+                isScrolled ? "text-white" : "text-white"
               }`}
               fill="none"
               stroke="currentColor"
@@ -134,7 +134,7 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-6 text-white"
           >
             <path
               strokeLinecap="round"
@@ -143,7 +143,7 @@ const Navbar = () => {
             />
           </svg>
 
-          <span className={`${isScrolled ? "text-white" : "text-gray-800"}`}>Wallet Connect</span>
+          <span className={`${isScrolled ? "text-white" : "text-white"}`}>Wallet Connect</span>
         </button>
       </div>
     </nav>

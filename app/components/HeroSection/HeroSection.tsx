@@ -1,76 +1,74 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 
-import { useState } from 'react'
-
-
-
+import { useState } from "react";
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white">
-   
-      <div className="relative isolate  lg:px-8">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        >
-          <div
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          />
-        </div>
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-32">
-        
-          <div className="text-left">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Tailwind Template for NFT Marketplace and Web3 Platforms
-            </h1>
-            <div className="hidden pt-8 sm:mb-8 sm:flex sm:justify-start">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{' '}
-              <a href="#" className="font-semibold text-indigo-600">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
-            </p>
-            
-            <div className="mt-10 flex items-center justify-start gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Explore now
-              </a>
-              <a href="#" className="flex items-center space-x-2  border border-black rounded-md px-4 py-2 hover:bg-gray-100">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
-            </div>
+    <div className="bg-dark">
+      <div className="relative isolate lg:px-8">
+        {/* Fond de la section avec dégradé et lignes verticales */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#10102a] to-[#0c0c24] ">
+          {/* Lignes verticales */}
+          <div className="absolute inset-0 flex justify-around items-center">
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
           </div>
         </div>
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        >
-          <div
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-          />
+
+        <div className="mx-auto max-w-7xl py-32 sm:py-48 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Section du texte */}
+            <div className="text-left">
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                Tailwind Template for NFT Marketplace and Web3 Platforms
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                Template for NFT, Token, and Web3 marketplace projects, based on
+                Tailwind CSS. Comes with all the essential UI components and
+                pages you need to build an NFT marketplace or all sorts of Web3
+                platforms.
+              </p>
+
+              <div className="mt-10 flex items-center justify-start gap-x-6">
+                <a
+                  href="#"
+                  className="rounded-md bg-indigo-600 space-x-2 px-4 py-4 pl-7 pr-7 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Explore now
+                </a>
+                <a
+                  href="#"
+                  className="flex items-center space-x-2 border border-white rounded-md px-4 py-4 pl-7 pr-7 text-white hover:bg-indigo-600 hover:border-indigo-600"
+                >
+                  Upload Your Art
+                </a>
+              </div>
+            </div>
+
+            {/* Section de l'image */}
+            <div className="flex justify-center">
+              <img
+                src="/hero-image.svg"
+                alt="Description de l'image"
+                className="w-full h-auto max-w-md"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

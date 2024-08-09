@@ -76,11 +76,11 @@ const TopArtists = () => {
   }, [currentIndex, isTransitioning]);
 
   return (
-    <div className="relative bg-[#1c1c28] p-8 rounded-lg overflow-hidden">
+    <div className="mx-auto relative  bg-gradient-to-b from-[#10102a] to-[#10102a] p-8  overflow-hidden">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-white text-2xl font-bold">Top Artists</h2>
         <div className="flex items-center space-x-2">
-          <div className="border-r border-gray-600 h-6"></div>
+       
           <button
             className="bg-gray-700 text-white rounded-full p-2 cursor-pointer"
             onClick={prevSlide}
@@ -121,6 +121,7 @@ const TopArtists = () => {
           </button>
         </div>
       </div>
+      <div className="border-b border-gray-600 h-6"></div>
       <div className="w-full overflow-hidden">
         <div
           ref={artistListRef}
