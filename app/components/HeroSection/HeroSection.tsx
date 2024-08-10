@@ -7,7 +7,7 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-dark">
+    <div className="bg-dark mx-auto">
       <div className="relative isolate lg:px-8">
         {/* Fond de la section avec dégradé et lignes verticales */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#10102a] to-[#0c0c24] ">
