@@ -55,13 +55,13 @@ const Navbar = () => {
 
       {/* Navigation Menu */}
       <div className="flex items-center space-x-8">
-        <Link href="/" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+        <Link href="/" className={` text-white ${isScrolled ? " hover:text-gray-300" : "text-white hover:text-gray-600"}`}>
           Home
         </Link>
-        <Link href="/explore" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+        <Link href="/explore" className={isScrolled ? "text-[#BABABA] hover:text-gray-300" : "text-white hover:text-gray-600"}>
           Explore
         </Link>
-        <Link href="/community" className={isScrolled ? "text-white hover:text-gray-300" : "text-white hover:text-gray-600"}>
+        <Link href="/community" className={isScrolled ? "text-[#BABABA] hover:text-gray-300" : "text-white hover:text-gray-600"}>
           Community
         </Link>
 
@@ -100,51 +100,51 @@ const Navbar = () => {
           >
             <Link
               href="/explore-items"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Explore items
             </Link>
             <Link
               href="/item-details"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Item Details
             </Link>
             <Link
               href="/create-item"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Create item
             </Link>
             <Link
               href="/connect-wallet"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Connect Wallet
             </Link>
             <Link
               href="/support"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Support
             </Link>
-            <hr className="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+            <hr className="my-2 h-0.5 border-t-0 ml-4 mr-4 bg-neutral-100 dark:bg-white/10" />
             <Link
               href="/signUp"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Sign Up Page
             </Link>
             <Link
               href="/signIn"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-gray-500 text-left text-sm hover:text-white disabled:text-gray-500"
+              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
             >
               Sign In Page
             </Link>
           </div>
         </div>
 
-        <Link href="/support" className={isScrolled ? "text-white hover:text-gray-300" : "text-gray-500"}>
+        <Link href="/support" className={isScrolled ? " hover:text-gray-300" : "text-gray-500"}>
           Support
         </Link>
       </div>
