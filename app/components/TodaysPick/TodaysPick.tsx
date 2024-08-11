@@ -103,15 +103,13 @@ const TodaysPick = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {Picks.map((Pick) => (
               <div key={Pick.id} className="bg-[#262639] rounded-lg p-4">
-                <div className="relative">
-                  <img
-                    src={Pick.image}
-                    alt={Pick.title}
-                    className="w-full rounded-lg"
-                  />
-                  <div className="absolute top-2 right-2 bg-white rounded-full px-2 py-1">
-                    <span className="text-black text-sm">❤️ {Pick.likes}</span>
-                  </div>
+                <img
+                  src={Pick.image}
+                  alt={Pick.title}
+                  className="w-full rounded-lg"
+                />
+                <div className="absolute top-2 right-2 bg-white rounded-full px-2 py-1">
+                  <span className="text-black text-sm">❤️ {Pick.likes}</span>
                 </div>
                 <h3 className="text-white text-lg font-semibold mt-4">
                   {Pick.title} #{Pick.id}
@@ -144,6 +142,11 @@ const TodaysPick = () => {
               </div>
             ))}
           </div>
+        </div>
+        <div className="flex justify-center w-full pt-14 pb-11">
+          <button className="text-white border border-white px-10 py-4 rounded-lg  hover:bg-indigo-600 hover:border-indigo-600 transition-opacity duration-300">
+            Load More...
+          </button>
         </div>
       </div>
     </div>
