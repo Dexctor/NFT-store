@@ -107,7 +107,7 @@ const TopArtists = () => {
           <div className="flex "> {/* Augmentez l'espacement ici */}
             {artists.map((artist, index) => (
               <div key={index} className="w-[25%] p-2 flex-shrink-0"> {/* Ajustez la largeur */}
-                <div className="flex-row bg-[#262639] p-6 rounded-md flex items-center border border-[#3c3c4d] hover:bg-gradient-to-r from-[#ebc77a] via-[#ca3f8d] to-[#5142fc]">
+                <div className="flex-row bg-[#262639] p-5 rounded-md flex items-center border border-[#3c3c4d] transition duration-300 ease-in-out hover:bg-gradient-to-r  from-[#ebc77a] via-[#ca3f8d] to-[#5142fc] ">
                   <div className="relative h-12 w-12 rounded-md m-0 p-0 overflow-hidden ">
                     <Image
                       src={artist.imgSrc}
@@ -117,10 +117,10 @@ const TopArtists = () => {
                      (max-width: 1200px) 50vw, 
                      33vw"
                       style={{ objectFit: "cover", objectPosition: "center" }}
-                      className=""
+                      className="mr-3"
                     />
                   </div>
-                  <div>
+                  <div className="p-2">
                   <h3 className="text-md font-semibold text-white mb-1">
                     {artist.username}
                   </h3>

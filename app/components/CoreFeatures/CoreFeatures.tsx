@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -6,28 +7,28 @@ export default function CoreFeatures() {
     {
       title: "Set Up Your Wallet",
       text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "https://via.placeholder.com/50", // Remplacez par votre icône
+      icon: "/images/icon-f1.svg", 
       bgColor: "bg-[#2C2C39]",
       textColor: "text-white",
     },
     {
       title: "Make Your Collection",
       text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "https://via.placeholder.com/50", // Remplacez par votre icône
+      icon: "/images/icon-f2.svg", 
       bgColor: "bg-[#2C2C39]",
       textColor: "text-white",
     },
     {
       title: "Add Your NFTs",
       text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "https://via.placeholder.com/50", // Remplacez par votre icône
+      icon: "/images/icon-f3.svg",
       bgColor: "bg-[#2C2C39]",
       textColor: "text-white",
     },
     {
       title: "List Them For Sale",
       text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "https://via.placeholder.com/50", // Remplacez par votre icône
+      icon: "/images/icon-f4.svg", 
       bgColor: "bg-[#2C2C39]",
       textColor: "text-white",
     },
@@ -47,23 +48,21 @@ export default function CoreFeatures() {
         </div>
       </div>
 
-      <div className="container mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 hover:text-black">
+      <div className="container mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`rounded-lg p-6 flex flex-col items-center transition duration-300 border border-[#4D4C5A] ${feature.bgColor} hover:bg-white hover:text-black`}
+            className={`rounded-lg p-6 flex flex-col items-center transition duration-300 border border-[#4D4C5A] ${feature.bgColor} hover:bg-white group`}
           >
             <div
-              className={`rounded-full p-4 bg-white flex items-center justify-center mb-4 transition duration-300 ${
-                feature.textColor ? feature.textColor : "text-black hover:text-black"
-              }`}
+              className={`rounded-full p-4 bg-white text-black flex items-center justify-center mb-4 transition duration-300 group-hover:text-black`}
             >
-              <img src={feature.icon} alt={feature.title} />
+              <img src={feature.icon}/>
             </div>
-            <h3 className={`text-2xl font-bold mb-2 ${feature.textColor}`}>
+            <h3 className={`text-2xl font-semibold mb-2 text-white group-hover:text-black`}>
               {feature.title}
             </h3>
-            <p className={`text-center ${feature.textColor}`}>
+            <p className={`text-center text-white group-hover:text-black`}>
               {feature.text}
             </p>
           </div>

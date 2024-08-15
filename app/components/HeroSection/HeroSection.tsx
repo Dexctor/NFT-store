@@ -51,7 +51,7 @@ export default function Example() {
                 </a>
                 <a
                   href="#"
-                  className="flex items-center space-x-2 border border-white rounded-md px-4 py-4 pl-7 pr-7 text-white hover:bg-indigo-600 hover:border-indigo-600"
+                  className="flex items-center space-x-2 border border-white rounded-md px-4 py-4 pl-7 pr-7 text-white hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out"
                 >
                   Upload Your Art
                 </a>
