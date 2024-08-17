@@ -1,6 +1,6 @@
-"use client"
-import Breadcrumbs from '../components/breadcums/breadcum';
-import { useState } from 'react';
+"use client";
+import Breadcrumbs from "../components/breadcums/breadcum";
+import { useState } from "react";
 
 export default function CreateItemPage() {
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
@@ -54,8 +54,11 @@ export default function CreateItemPage() {
                   </label>
                   {selectedFiles && (
                     <div className="mt-4">
-                      {[...selectedFiles].map((file, index) => (
-                        <div key={index} className="flex justify-between items-center bg-[#353444] p-2 rounded-lg mb-2">
+                      {Array.from(selectedFiles).map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center bg-[#353444] p-2 rounded-lg mb-2"
+                        >
                           <span className="text-white">{file.name}</span>
                           <button className="text-red-500">
                             <svg
@@ -100,7 +103,10 @@ export default function CreateItemPage() {
                   />
                 </div>
                 <div className="mt-4">
-                  <label htmlFor="description" className="block text-white mb-2">
+                  <label
+                    htmlFor="description"
+                    className="block text-white mb-2"
+                  >
                     Description (optional)
                   </label>
                   <textarea
@@ -126,7 +132,10 @@ export default function CreateItemPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <label htmlFor="royalties" className="block text-white mb-2">
+                    <label
+                      htmlFor="royalties"
+                      className="block text-white mb-2"
+                    >
                       Royalties
                     </label>
                     <input
@@ -153,13 +162,17 @@ export default function CreateItemPage() {
 
                 <div className="mt-4">
                   <p className="text-white font-semibold">
-                    Time Auctions <span className="text-gray-400">(optional)</span>
+                    Time Auctions{" "}
+                    <span className="text-gray-400">(optional)</span>
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <label htmlFor="startDate" className="block text-white mb-2">
+                    <label
+                      htmlFor="startDate"
+                      className="block text-white mb-2"
+                    >
                       Starting date
                     </label>
                     <input
@@ -170,7 +183,10 @@ export default function CreateItemPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="expireDate" className="block text-white mb-2">
+                    <label
+                      htmlFor="expireDate"
+                      className="block text-white mb-2"
+                    >
                       Expiration date
                     </label>
                     <input
