@@ -94,10 +94,10 @@ const Navbar = () => {
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <Link href="/explore-items" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+              <Link href="/explore" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
                 Explore items
               </Link>
-              <Link href="/item-details" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+              <Link href="/explore/1" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
                 Item Details
               </Link>
               <Link href="/create-item" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">

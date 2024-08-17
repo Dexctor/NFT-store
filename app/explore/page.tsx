@@ -119,7 +119,7 @@ export default function ExplorePage() {
                       {pick.eth} ETH
                     </div>
                   </div>
-                
+              
                   <div className="flex justify-between items-center  border-t-2 border-[#4d4c5a] pt-8">
                     <button className="bg-[#5D3EFF] text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-200">
                       Place Bid
