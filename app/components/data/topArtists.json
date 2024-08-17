@@ -1,0 +1,33 @@
+[
+    {
+      "username": "@Devid_Miller",
+      "eth": "14.55 ETH",
+      "imgSrc": "/images/image-01.jpg"
+    },
+    {
+      "username": "@Elon_Mask",
+      "eth": "12.25 ETH",
+      "imgSrc": "/images/image-02.jpg"
+    },
+    {
+      "username": "@Hiliya_Farah",
+      "eth": "9.89 ETH",
+      "imgSrc": "/images/image-03.jpg"
+    },
+    {
+      "username": "@Wilium_Dev",
+      "eth": "2.09 ETH",
+      "imgSrc": "/images/image-04.jpg"
+    },
+    {
+      "username": "@New_Artist1",
+      "eth": "1.50 ETH",
+      "imgSrc": "/images/image-01.jpg"
+    },
+    {
+      "username": "@New_Artist2",
+      "eth": "3.75 ETH",
+      "imgSrc": "/images/image-02.jpg"
+    }
+  ]
+  

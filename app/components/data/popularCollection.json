@@ -1,0 +1,30 @@
+[
+    {
+      "mainImage": "/images/image-c1.svg",
+      "smallImages": [
+        "/images/image-c2.svg",
+        "/images/image-c3.svg"
+      ],
+      "title": "Creative 3d illustration",
+      "creator": {
+        "name": "Lathium_Lui",
+        "image": "/images/image-01.jpg"
+      },
+      "likes": "1.6K"
+    },
+    {
+      "mainImage": "/images/image-c5.svg",
+      "smallImages": [
+        "/images/image-c6.svg",
+        "/images/image-c7.svg",
+        "/images/image-c4.svg"
+      ],
+      "title": "Modern illustration",
+      "creator": {
+        "name": "Andrio_Hev",
+        "image": "/images/image-02.jpg"
+      },
+      "likes": "3.6K"
+    }
+  ]
+  

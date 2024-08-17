@@ -1,0 +1,85 @@
+{
+    "picks": [
+      {
+        "id": 551,
+        "title": "22-Bit Digital",
+        "image": "/images/image-001.svg",
+        "imageCreator": "/images/image-01.jpg",
+        "likes": "4.6K",
+        "creator": "Devid_Mill",
+        "eth": "5.49",
+        "time": "05 : 15 : 07 : 45"
+      },
+      {
+        "id": 729,
+        "title": "25-Bit Digital",
+        "image": "/images/image-002.svg",
+        "imageCreator": "/images/image-02.jpg",
+        "likes": "1.6K",
+        "creator": "Devid_Meth",
+        "eth": "1.58",
+        "time": "06 : 15 : 07 : 55"
+      },
+      {
+        "id": 395,
+        "title": "27-Bit Digital",
+        "image": "/images/image-003.svg",
+        "imageCreator": "/images/image-03.jpg",
+        "likes": "500",
+        "creator": "Jemmy_Fran",
+        "eth": "3.25",
+        "time": "02 : 15 : 08 : 44"
+      },
+      {
+        "id": 439,
+        "title": "35-Bit Digital",
+        "image": "/images/image-004.svg",
+        "imageCreator": "/images/image-04.jpg",
+        "likes": "200",
+        "creator": "Miliya_Cho",
+        "eth": "1.57",
+        "time": "07 : 15 : 03 : 12"
+      },
+      {
+        "id": 552,
+        "title": "22-Bit Digital",
+        "image": "/images/image-001.svg",
+        "imageCreator": "/images/image-01.jpg",
+        "likes": "4.6K",
+        "creator": "Devid_Mill",
+        "eth": "5.49",
+        "time": "05 : 15 : 07 : 45"
+      },
+      {
+        "id": 730,
+        "title": "25-Bit Digital",
+        "image": "/images/image-002.svg",
+        "imageCreator": "/images/image-02.jpg",
+        "likes": "1.6K",
+        "creator": "Devid_Meth",
+        "eth": "1.58",
+        "time": "06 : 15 : 07 : 55"
+      },
+      {
+        "id": 396,
+        "title": "27-Bit Digital",
+        "image": "/images/image-003.svg",
+        "imageCreator": "/images/image-03.jpg",
+        "likes": "500",
+        "creator": "Jemmy_Fran",
+        "eth": "3.25",
+        "time": "02 : 15 : 08 : 44"
+      },
+      {
+        "id": 440,
+        "title": "35-Bit Digital",
+        "image": "/images/image-004.svg",
+        "imageCreator": "/images/image-04.jpg",
+        "likes": "200",
+        "creator": "Miliya_Cho",
+        "eth": "1.57",
+        "time": "07 : 15 : 03 : 12"
+      }
+    ]
+  }
+  

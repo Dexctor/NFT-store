@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -10,17 +10,16 @@ const Navbar = () => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 0);
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,7 +34,6 @@ const Navbar = () => {
     };
 
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -49,33 +47,30 @@ const Navbar = () => {
     >
       {/* Logo and NFT Text */}
       <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="Logo" className="h-20 w-20" />
+        <img src="/logo.png" alt="Logo" className="h-14 w-14" />
         <span className="font-bold text-3xl text-white">NFT</span>
       </div>
 
       {/* Navigation Menu */}
       <div className="flex items-center space-x-8">
-        <Link href="/" className={` text-white ${isScrolled ? " hover:text-gray-300" : "text-white hover:text-gray-600"}`}>
+        <Link href="/" className={`text-white hover:text-gray-300`}>
           Home
         </Link>
-        <Link href="/explore" className={isScrolled ? "text-[#BABABA] hover:text-gray-300" : "text-white hover:text-gray-600"}>
+        <Link href="/explore" className="text-[#BABABA] hover:text-gray-300">
           Explore
         </Link>
-        <Link href="/community" className={isScrolled ? "text-[#BABABA] hover:text-gray-300" : "text-white hover:text-gray-600"}>
+        <Link href="https://discord.com" className="text-[#BABABA] hover:text-gray-300">
           Community
         </Link>
 
         {/* Dropdown Menu */}
-        <div
-          className="relative"
-          onMouseEnter={() => setDropdownOpen(true)}
-          onMouseLeave={() => setDropdownOpen(false)}
-        >
+        <div className="relative">
           <button
             ref={buttonRef}
             aria-expanded={dropdownOpen}
             type="button"
-            className="flex items-center gap-2 bg-transparent text-white px-5 py-2.5 rounded-md"
+            className="flex items-center gap-2 bg-transparent text-[#BABABA] px-5 py-2.5 rounded-md"
+            onMouseEnter={() => setDropdownOpen(true)}
           >
             Page
             <svg
@@ -92,59 +87,40 @@ const Navbar = () => {
             </svg>
           </button>
 
-          <div
-            ref={panelRef}
-            className={`p-4 absolute left-0 mt-2 w-52 rounded-md bg-[#1d2144] shadow-md transition-opacity duration-300 ${
-              dropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            <Link
-              href="/explore-items"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
+          {dropdownOpen && (
+            <div
+              ref={panelRef}
+              className="p-4 absolute left-0 mt-2 w-52 rounded-md bg-[#1d2144] shadow-md"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
             >
-              Explore items
-            </Link>
-            <Link
-              href="/item-details"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Item Details
-            </Link>
-            <Link
-              href="/create-item"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Create item
-            </Link>
-            <Link
-              href="/connect-wallet"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Connect Wallet
-            </Link>
-            <Link
-              href="/support"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Support
-            </Link>
-            <hr className="my-2 h-0.5 border-t-0 ml-4 mr-4 bg-neutral-100 dark:bg-white/10" />
-            <Link
-              href="/signUp"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Sign Up Page
-            </Link>
-            <Link
-              href="/signIn"
-              className="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-[#BABABA] text-left text-sm hover:text-white disabled:text-gray-500"
-            >
-              Sign In Page
-            </Link>
-          </div>
+              <Link href="/explore-items" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Explore items
+              </Link>
+              <Link href="/item-details" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Item Details
+              </Link>
+              <Link href="/create-item" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Create item
+              </Link>
+              <Link href="/connect-wallet" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Connect Wallet
+              </Link>
+              <Link href="/support" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Support
+              </Link>
+              <hr className="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+              <Link href="/signUp" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Sign Up Page
+              </Link>
+              <Link href="/signIn" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
+                Sign In Page
+              </Link>
+            </div>
+          )}
         </div>
 
-        <Link href="/support" className={isScrolled ? " hover:text-gray-300" : "text-gray-500"}>
+        <Link href="/support" className="text-[#BABABA] hover:text-gray-300">
           Support
         </Link>
       </div>
@@ -157,7 +133,7 @@ const Navbar = () => {
             className="focus:outline-none"
           >
             <svg
-              className={`h-6 w-6 ${isScrolled ? "text-white" : "text-white"}`}
+              className="h-6 w-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -180,24 +156,22 @@ const Navbar = () => {
           )}
         </div>
         <button className="flex items-center space-x-2 border border-white rounded-lg px-4 py-2 hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="size-6 text-white"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"
-    />
-  </svg>
-
-  <span className="text-white">Wallet Connect</span>
-</button>
-
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-6 w-6 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"
+            />
+          </svg>
+          <span className="text-white">Wallet Connect</span>
+        </button>
       </div>
     </nav>
   );

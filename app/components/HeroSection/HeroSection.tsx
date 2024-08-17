@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,20 +12,20 @@ export default function Example() {
       <div className="relative isolate lg:px-8">
         {/* Fond de la section avec dégradé et lignes verticales */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#10102a] to-[#0c0c24] ">
-          {/* Lignes verticales */}
-          <div className="absolute inset-0 flex justify-around items-center">
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
-            <span className="h-full w-[1.1px] bg-gradient-to-b from-white to-transparent opacity-20"></span>
+          {/* Lignes verticales avec CSS Grid */}
+          <div className="absolute inset-0 grid grid-cols-12">
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
+            <div className="h-full w-px bg-gradient-to-b from-white to-transparent opacity-20"></div>
           </div>
         </div>
 
@@ -32,7 +33,7 @@ export default function Example() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Section du texte */}
             <div className="text-left">
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tight leading-10 text-white sm:text-5xl">
                 Tailwind Template for NFT Marketplace and Web3 Platforms
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -45,13 +46,13 @@ export default function Example() {
               <div className="mt-10 flex items-center justify-start gap-x-6">
                 <a
                   href="#"
-                  className="rounded-md bg-indigo-600 space-x-2 px-4 py-4 pl-7 pr-7 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-md bg-indigo-600 px-7 py-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Explore now
                 </a>
                 <a
                   href="#"
-                  className="flex items-center space-x-2 border border-white rounded-md px-4 py-4 pl-7 pr-7 text-white hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out"
+                  className="flex items-center border border-white rounded-md px-7 py-4 text-white hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out"
                 >
                   Upload Your Art
                 </a>
@@ -60,10 +61,13 @@ export default function Example() {
 
             {/* Section de l'image */}
             <div className="flex justify-center">
-              <img
+              <Image
                 src="/hero-image.svg"
                 alt="Description de l'image"
                 className="w-full h-auto max-w-md"
+                width={500}
+                height={500}
+                priority
               />
             </div>
           </div>

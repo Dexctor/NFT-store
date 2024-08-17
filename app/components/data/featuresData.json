@@ -1,0 +1,31 @@
+[
+    {
+      "title": "Set Up Your Wallet",
+      "text": "Lorem ipsum dolor sit amet consectetur smit.",
+      "icon": "/images/icon-f1.svg", 
+      "bgColor": "bg-[#2C2C39]",
+      "textColor": "text-white"
+    },
+    {
+      "title": "Make Your Collection",
+      "text": "Lorem ipsum dolor sit amet consectetur smit.",
+      "icon": "/images/icon-f2.svg", 
+      "bgColor": "bg-[#2C2C39]",
+      "textColor": "text-white"
+    },
+    {
+      "title": "Add Your NFTs",
+      "text": "Lorem ipsum dolor sit amet consectetur smit.",
+      "icon": "/images/icon-f3.svg",
+      "bgColor": "bg-[#2C2C39]",
+      "textColor": "text-white"
+    },
+    {
+      "title": "List Them For Sale",
+      "text": "Lorem ipsum dolor sit amet consectetur smit.",
+      "icon": "/images/icon-f4.svg", 
+      "bgColor": "bg-[#2C2C39]",
+      "textColor": "text-white"
+    }
+  ]
+  

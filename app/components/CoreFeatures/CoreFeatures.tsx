@@ -1,39 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import features from '../data/featuresData.json'; // Importer les données
 
 export default function CoreFeatures() {
-  const features = [
-    {
-      title: "Set Up Your Wallet",
-      text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "/images/icon-f1.svg", 
-      bgColor: "bg-[#2C2C39]",
-      textColor: "text-white",
-    },
-    {
-      title: "Make Your Collection",
-      text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "/images/icon-f2.svg", 
-      bgColor: "bg-[#2C2C39]",
-      textColor: "text-white",
-    },
-    {
-      title: "Add Your NFTs",
-      text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "/images/icon-f3.svg",
-      bgColor: "bg-[#2C2C39]",
-      textColor: "text-white",
-    },
-    {
-      title: "List Them For Sale",
-      text: "Lorem ipsum dolor sit amet consectetur smit.",
-      icon: "/images/icon-f4.svg", 
-      bgColor: "bg-[#2C2C39]",
-      textColor: "text-white",
-    },
-  ];
-
   return (
     <div className="bg-[#0c0c24] py-16">
       <div className="flex justify-center items-center">
@@ -52,17 +22,17 @@ export default function CoreFeatures() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`rounded-lg p-6 flex flex-col items-center transition duration-300 border border-[#4D4C5A] ${feature.bgColor} hover:bg-white group`}
+            className={`rounded-lg p-6 flex flex-col items-start transition duration-300 border border-[#4D4C5A] bg-[#2c2c39] ${feature.bgColor} hover:bg-white group`}
           >
             <div
-              className={`rounded-full p-4 bg-white text-black flex items-center justify-center mb-4 transition duration-300 group-hover:text-black`}
+              className={`rounded-full p-4 bg-white text-black flex items-start justify-center mb-4 transition duration-300 group-hover:text-black`}
             >
               <img src={feature.icon}/>
             </div>
             <h3 className={`text-2xl font-semibold mb-2 text-white group-hover:text-black`}>
               {feature.title}
             </h3>
-            <p className={`text-center text-white group-hover:text-black`}>
+            <p className={`text-left text-gray-400 font-medium group-hover:text-gray-400`}>
               {feature.text}
             </p>
           </div>

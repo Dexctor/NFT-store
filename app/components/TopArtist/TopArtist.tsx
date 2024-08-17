@@ -1,55 +1,17 @@
 "use client";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import artists from '../data/topArtists.json'; // Importer les données
 
 const TopArtists = () => {
-  const artists = [
-    {
-      username: "@Devid_Miller",
-      eth: "14.55 ETH",
-      imgSrc: "/images/image-01.jpg",
-    },
-    {
-      username: "@Elon_Mask",
-      eth: "12.25 ETH",
-      imgSrc: "/images/image-02.jpg",
-    },
-    {
-      username: "@Hiliya_Farah",
-      eth: "9.89 ETH",
-      imgSrc: "/images/image-03.jpg",
-    },
-    {
-      username: "@Wilium_Dev",
-      eth: "2.09 ETH",
-      imgSrc: "/images/image-04.jpg",
-    },
-    {
-      username: "@New_Artist1",
-      eth: "1.50 ETH",
-      imgSrc: "/images/image-01.jpg",
-    },
-    {
-      username: "@New_Artist2",
-      eth: "3.75 ETH",
-      imgSrc: "/images/image-02.jpg",
-    },
-  ];
-
   const [emblaRef, embla] = useEmblaCarousel({
     loop: true,
-    align: 'start',
-    slidesToScroll: 3, // Définit le nombre de slides défilant à la fois
+    align: "start",
+    slidesToScroll: 1,
   });
 
-
-  const nextSlide = () => {
-    if (embla) embla.scrollNext();
-  };
-
-  const prevSlide = () => {
-    if (embla) embla.scrollPrev();
-  };
+  const nextSlide = () => embla && embla.scrollNext();
+  const prevSlide = () => embla && embla.scrollPrev();
 
   return (
     <div className="bg-[#0c0c24]">
@@ -59,7 +21,7 @@ const TopArtists = () => {
           <h2 className="text-white text-3xl font-bold">Top Artists</h2>
           <div className="flex items-center space-x-4">
             <button
-              className="bg-gray-700 text-white rounded-md p-2 cursor-pointer"
+              className="bg-gray-700 text-white rounded-md p-2"
               onClick={prevSlide}
             >
               <svg
@@ -78,7 +40,7 @@ const TopArtists = () => {
               </svg>
             </button>
             <button
-              className="bg-gray-700 text-white rounded-md p-2 cursor-pointer"
+              className="bg-gray-700 text-white rounded-md p-2"
               onClick={nextSlide}
             >
               <svg
@@ -103,28 +65,27 @@ const TopArtists = () => {
         <div className="border-b border-gray-600 mb-6"></div>
 
         {/* Carousel */}
-        <div className="w-full overflow-hidden flex" ref={emblaRef}>
-          <div className="flex "> {/* Augmentez l'espacement ici */}
+        <div className="w-full overflow-hidden" ref={emblaRef}>
+          <div className="flex space-x-4">
             {artists.map((artist, index) => (
-              <div key={index} className="w-[25%] p-2 flex-shrink-0"> {/* Ajustez la largeur */}
-                <div className="flex-row bg-[#262639] p-5 rounded-md flex items-center border border-[#3c3c4d] transition duration-300 ease-in-out hover:bg-gradient-to-r  from-[#ebc77a] via-[#ca3f8d] to-[#5142fc] ">
-                  <div className="relative h-12 w-12 rounded-md m-0 p-0 overflow-hidden ">
+              <div key={index} className="w-1/4 p-2 flex-shrink-0">
+                <div className="flex bg-[#262639] p-5 rounded-md items-center border border-[#3c3c4d] transition duration-300 ease-in-out hover:bg-gradient-to-r from-[#ebc77a] via-[#ca3f8d] to-[#5142fc]">
+                  <div className="relative h-12 w-12 rounded-md overflow-hidden">
                     <Image
                       src={artist.imgSrc}
                       alt={artist.username}
                       fill
                       sizes="(max-width: 768px) 100vw, 
-                     (max-width: 1200px) 50vw, 
-                     33vw"
+                             (max-width: 1200px) 50vw, 
+                             33vw"
                       style={{ objectFit: "cover", objectPosition: "center" }}
-                      className="mr-3"
                     />
                   </div>
-                  <div className="p-2">
-                  <h3 className="text-md font-semibold text-white mb-1">
-                    {artist.username}
-                  </h3>
-                  <span className="text-[#36b37e] text-sm">{artist.eth}</span>
+                  <div className="pl-4">
+                    <h3 className="text-md font-semibold text-white mb-1">
+                      {artist.username}
+                    </h3>
+                    <span className="text-[#36b37e] text-sm">{artist.eth}</span>
                   </div>
                 </div>
               </div>
