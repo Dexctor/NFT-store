@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import collections from '../data/popularCollection.json';
 
 const PopularCollection = () => {
@@ -36,104 +34,75 @@ const CollectionCard = ({ collection, index }: { collection: any; index: number 
 };
 
 const CollectionImages = ({ collection, index }: { collection: any; index: number }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const imageVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   if (index === 1) {
     return (
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        variants={imageVariants}
-        transition={{ duration: 0.5, staggerChildren: 0.2 }}
-        className="flex flex-col sm:flex-row w-full"
-      >
+      <div className="flex flex-col sm:flex-row w-full">
         <div className="flex-shrink-0 mb-4 sm:mb-0 sm:mr-4 w-full sm:w-1/3">
-          <motion.div variants={imageVariants}>
-            <Image
-              src={collection.mainImage}
-              alt={collection.title}
-              className="rounded-lg object-cover"
-              width={350} 
-              height={250}
-              layout="responsive"
-            />
-          </motion.div>
+          <Image
+            src={collection.mainImage}
+            alt={collection.title}
+            className="rounded-lg object-cover w-full h-auto"
+            width={350} 
+            height={250}
+            style={{ aspectRatio: '350/250' }}
+          />
         </div>
         <div className="flex flex-col justify-between w-full sm:w-2/3">
           <div className="grid grid-cols-2 gap-4 mb-4">
             {collection.smallImages.slice(0, 2).map((image: string, idx: number) => (
-              <motion.div key={idx} variants={imageVariants}>
-                <Image
-                  src={image}
-                  alt={`${collection.title} small image ${idx + 1}`}
-                  className="rounded-lg object-cover"
-                  width={100}
-                  height={100}
-                  layout="responsive"
-                />
-              </motion.div>
+              <Image
+                key={idx}
+                src={image}
+                alt={`${collection.title} small image ${idx + 1}`}
+                className="rounded-lg object-cover w-full h-auto"
+                width={100}
+                height={100}
+                style={{ aspectRatio: '1/1' }}
+              />
             ))}
           </div>
-          <motion.div variants={imageVariants}>
+          <div>
             <Image
               src={collection.smallImages[2]}
               alt={`${collection.title} small image 3`}
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover w-full h-auto"
               width={200}
               height={100}
-              layout="responsive"
+              style={{ aspectRatio: '2/1' }}
             />
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      variants={imageVariants}
-      transition={{ duration: 0.5, staggerChildren: 0.2 }}
-      className="flex flex-col sm:flex-row"
-    >
+    <div className="flex flex-col sm:flex-row">
       <div className={`flex-shrink-0 mb-4 sm:mb-0 sm:mr-4 ${index === 0 ? 'w-full sm:w-96 h-60' : ''}`}>
-        <motion.div variants={imageVariants}>
-          <Image
-            src={collection.mainImage}
-            alt={collection.title}
-            className="rounded-lg object-cover"
-            width={index === 0 ? 250 : 200} 
-            height={index === 0 ? 250 : 200}
-            layout="responsive"
-          />
-        </motion.div>
+        <Image
+          src={collection.mainImage}
+          alt={collection.title}
+          className="rounded-lg object-cover w-full h-full"
+          width={index === 0 ? 250 : 200} 
+          height={index === 0 ? 250 : 200}
+          style={{ aspectRatio: index === 0 ? '1/1' : '200/200' }}
+        />
       </div>
       <div className="flex flex-row sm:flex-col justify-between">
         {collection.smallImages.map((image: string, idx: number) => (
-          <motion.div key={idx} variants={imageVariants} className={`${idx < collection.smallImages.length - 1 ? 'mr-2 sm:mr-0 sm:mb-4' : ''}`}>
+          <div key={idx} className={`${idx < collection.smallImages.length - 1 ? 'mr-2 sm:mr-0 sm:mb-4' : ''}`}>
             <Image
               src={image}
               alt={`${collection.title} small image ${idx + 1}`}
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover w-full h-auto"
               width={80}
               height={80}
-              layout="responsive"
+              style={{ aspectRatio: '1/1' }}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -171,7 +140,7 @@ const CollectionInfo = ({ collection }: { collection: any }) => {
             className="rounded-full object-cover"
             width={40}
             height={40}
-            layout="fixed"
+            style={{ width: '40px', height: '40px' }}
           />
         </div>
         <div>

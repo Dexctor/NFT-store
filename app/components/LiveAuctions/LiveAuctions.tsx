@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PicksData from '../data/picksData.json'; // Importer les données
+import { useAuctionTimer } from "@/app/hooks/useAuctionsTimer";
 
 interface Pick {
   id: number;
@@ -17,47 +18,8 @@ interface Pick {
 }
 
 const LiveAuctions = () => {
-  const picks: Pick[] = PicksData.picks.slice(0, 8); // Limiter à 8 éléments
-  const [endTimes, setEndTimes] = useState<{ [key: number]: number }>({});
-  const [timeLeft, setTimeLeft] = useState<{ [key: number]: string }>({});
-
-  useEffect(() => {
-    // Initialiser les temps de fin une seule fois
-    const initialEndTimes: { [key: number]: number } = {};
-    picks.forEach((pick) => {
-      const randomHours = Math.floor(Math.random() * (48 - 24 + 1)) + 24;
-      initialEndTimes[pick.id] = Date.now() + randomHours * 60 * 60 * 1000;
-    });
-    setEndTimes(initialEndTimes);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = Date.now();
-      const newTimeLeft: { [key: number]: string } = {};
-
-      picks.forEach((pick) => {
-        const endTime = endTimes[pick.id];
-        if (!endTime) return;
-
-        const difference = endTime - now;
-
-        if (difference > 0) {
-          const hours = Math.floor(difference / (1000 * 60 * 60));
-          const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-          newTimeLeft[pick.id] = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        } else {
-          newTimeLeft[pick.id] = "Terminé";
-        }
-      });
-
-      setTimeLeft(newTimeLeft);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [endTimes, picks]);
+  const picks: Pick[] = PicksData.picks.slice(0, 8);
+  const timers = useAuctionTimer(picks.map(pick => ({ id: pick.id, endTime: pick.time }))); // Modifié
 
   return (
     <div className="bg-[#0c0c24]">
@@ -112,7 +74,7 @@ const LiveAuctions = () => {
                   </div>
                 </div>
                 <div className="bg-[#1D1D33] text-center tracking-widest text-white rounded-lg mt-4 py-2 text-lg font-semibold">
-                  {timeLeft[pick.id] || pick.time}
+                  {timers[pick.id] || pick.time}
                 </div>
               </div>
             ))}
