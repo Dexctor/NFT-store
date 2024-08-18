@@ -1,10 +1,20 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import picksData from '../data/picksData.json'; // Remplacez par le chemin correct vers votre fichier data.json
 import Image from "next/image";
 
 const TodaysPick = () => {
   const { picks } = picksData;
+  const [visiblePicks, setVisiblePicks] = useState(8);
+
+  const loadMore = () => {
+    setVisiblePicks(prevVisible => Math.min(prevVisible + 8, picks.length));
+  };
+
+  const showLess = () => {
+    setVisiblePicks(8);
+  };
 
   return (
     <div className="bg-[#0c0c24]">
@@ -19,12 +29,12 @@ const TodaysPick = () => {
               View All
             </Link>
           </div>
-          <div className="border-b border-gray-600 mb-6"></div>
+          <div className="border-b border-gray-800 mb-6"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {picks.map((pick) => (
+            {picks.slice(0, visiblePicks).map((pick) => (
               <div
                 key={pick.id}
-                className="bg-[#262639] rounded-lg p-4 relative transition-transform transform hover:scale-105"
+                className="bg-[#262639] rounded-lg p-4 relative border border-[#4D4C5A] transition-transform transform hover:scale-1000 duration-100 ease-in-out"
               >
                 <div className="relative w-full h-0 pb-[100%]">
                   <Image
@@ -58,12 +68,12 @@ const TodaysPick = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-4">
-                  <button className="bg-[#5D3EFF] text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-200">
+                  <button className="bg-[#5D3EFF] text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
                     Place Bid
                   </button>
                   <Link
                     href="/path-for-view-history"
-                    className="text-white gap-2 flex flex-row justify-center items-center hover:text-indigo-500"
+                    className="text-white gap-2 flex flex-row justify-center items-center hover:text-indigo-600 transition duration-200 ease-in-out"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +83,7 @@ const TodaysPick = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="text-white hover:text-indigo-500"
+                      className="text-white hover:text-indigo-600 transition duration-200 ease-in-out"
                     >
                       <path
                         strokeLinecap="round"
@@ -89,9 +99,21 @@ const TodaysPick = () => {
           </div>
         </div>
         <div className="flex justify-center w-full pt-14 pb-11">
-          <button className="text-white border border-white px-10 py-4 rounded-lg hover:bg-indigo-600 hover:border-indigo-600 transition duration-300 ease-in-out">
-            Load More...
-          </button>
+          {visiblePicks < picks.length ? (
+            <button 
+              onClick={loadMore}
+              className="text-white border border-white px-10 py-4 rounded-lg hover:bg-indigo-600 hover:border-indigo-600 transition duration-300 ease-in-out"
+            >
+              Load More...
+            </button>
+          ) : (
+            <button 
+              onClick={showLess}
+              className="text-white border border-white px-10 py-4 rounded-lg hover:bg-indigo-600 hover:border-indigo-600 transition duration-300 ease-in-out"
+            >
+              Show less
+            </button>
+          )}
         </div>
       </div>
     </div>

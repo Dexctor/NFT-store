@@ -16,3 +16,6 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+main,body {
+  background-color: #0c0c24;
+}

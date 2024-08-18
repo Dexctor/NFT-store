@@ -8,7 +8,10 @@
         "likes": "4.6K",
         "creator": "Devid_Mill",
         "eth": "5.49",
-        "time": "05 : 15 : 07 : 45"
+        "time": "05 : 15 : 07 : 45",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 2,
@@ -18,7 +21,10 @@
         "likes": "1.6K",
         "creator": "Devid_Meth",
         "eth": "1.58",
-        "time": "06 : 15 : 07 : 55"
+        "time": "06 : 15 : 07 : 55",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 3,
@@ -28,7 +34,10 @@
         "likes": "500",
         "creator": "Jemmy_Fran",
         "eth": "3.25",
-        "time": "02 : 15 : 08 : 44"
+        "time": "02 : 15 : 08 : 44",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 4,
@@ -38,7 +47,10 @@
         "likes": "200",
         "creator": "Miliya_Cho",
         "eth": "1.57",
-        "time": "07 : 15 : 03 : 12"
+        "time": "07 : 15 : 03 : 12",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 5,
@@ -48,7 +60,10 @@
         "likes": "4.6K",
         "creator": "Devid_Mill",
         "eth": "5.49",
-        "time": "05 : 15 : 07 : 45"
+        "time": "05 : 15 : 07 : 45",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 6,
@@ -58,7 +73,10 @@
         "likes": "1.6K",
         "creator": "Devid_Meth",
         "eth": "1.58",
-        "time": "06 : 15 : 07 : 55"
+        "time": "06 : 15 : 07 : 55",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       },
       {
         "id": 7,
@@ -68,7 +86,11 @@
         "likes": "500",
         "creator": "Jemmy_Fran",
         "eth": "3.25",
-        "time": "02 : 15 : 08 : 44"
+        "time": "02 : 15 : 08 : 44",     
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+
       },
       {
         "id": 8,
@@ -78,7 +100,114 @@
         "likes": "200",
         "creator": "Miliya_Cho",
         "eth": "1.57",
-        "time": "07 : 15 : 03 : 12"
+        "time": "07 : 15 : 03 : 12",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 9,
+        "title": "22-Bit Digital",
+        "image": "/images/image-001.svg",
+        "imageCreator": "/images/image-01.jpg",
+        "likes": "4.6K",
+        "creator": "Devid_Mill",
+        "eth": "5.49",
+        "time": "05 : 15 : 07 : 45",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 10,
+        "title": "25-Bit Digital",
+        "image": "/images/image-002.svg",
+        "imageCreator": "/images/image-02.jpg",
+        "likes": "1.6K",
+        "creator": "Devid_Meth",
+        "eth": "1.58",
+        "time": "06 : 15 : 07 : 55",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 11,
+        "title": "27-Bit Digital",
+        "image": "/images/image-003.svg",
+        "imageCreator": "/images/image-03.jpg",
+        "likes": "500",
+        "creator": "Jemmy_Fran",
+        "eth": "3.25",
+        "time": "02 : 15 : 08 : 44",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 12,
+        "title": "35-Bit Digital",
+        "image": "/images/image-004.svg",
+        "imageCreator": "/images/image-04.jpg",
+        "likes": "200",
+        "creator": "Miliya_Cho",
+        "eth": "1.57",
+        "time": "07 : 15 : 03 : 12",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 13,
+        "title": "22-Bit Digital",
+        "image": "/images/image-001.svg",
+        "imageCreator": "/images/image-01.jpg",
+        "likes": "4.6K",
+        "creator": "Devid_Mill",
+        "eth": "5.49",
+        "time": "05 : 15 : 07 : 45",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 14,
+        "title": "25-Bit Digital",
+        "image": "/images/image-002.svg",
+        "imageCreator": "/images/image-02.jpg",
+        "likes": "1.6K",
+        "creator": "Devid_Meth",
+        "eth": "1.58",
+        "time": "06 : 15 : 07 : 55",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 15,
+        "title": "27-Bit Digital",
+        "image": "/images/image-003.svg",
+        "imageCreator": "/images/image-03.jpg",
+        "likes": "500",
+        "creator": "Jemmy_Fran",
+        "eth": "3.25",
+        "time": "02 : 15 : 08 : 44",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
+      },
+      {
+        "id": 16,
+        "title": "35-Bit Digital",
+        "image": "/images/image-004.svg",
+        "imageCreator": "/images/image-04.jpg",
+        "likes": "200",
+        "creator": "Miliya_Cho",
+        "eth": "1.57",
+        "time": "07 : 15 : 03 : 12",
+        "description": "Une œuvre d'art numérique captivante en 22 bits",
+        "currentBid": 5.2,
+        "auctionEnds": "2023-12-31T23:59:59Z"
       }
     ]
   }
