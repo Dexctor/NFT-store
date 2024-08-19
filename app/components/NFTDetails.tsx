@@ -22,7 +22,7 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
         </div>
       </div>
       <div className="w-full lg:w-1/2">
-        <div className="pl-8">
+        <div className="">
           <div className="mb-9 flex justify-between items-center">
             <h2 className="text-white text-3xl md:text-[38px] font-bold">
               {nft.title}
@@ -45,7 +45,7 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
               </span>
             </button>
           </div>
-          <div className="mb-9 flex flex-wrap">
+          <div className="mb-9 flex flex-wrap gap-8">
             <div className=" flex items-center  ">
               <div className="mr-2.5  w-11">
                 {nft.creatorImage ? (
@@ -69,7 +69,7 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
                 </h3>
               </div>
             </div>
-            <div className="flex items-center pl-8">
+            <div className="flex items-center">
               <div className="mr-2.5 h-11 w-11">
                 {nft.creatorImage ? (
                   <Image

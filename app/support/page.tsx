@@ -5,8 +5,8 @@ const SupportPage = () => {
   return (
     <section className="bg-[#0c0c24] py-10 sm:py-16 md:py-20">
         <Breadcrumbs/>
-      <div className=" mx-auto px-24 pt-16">
-        <div className="bg-[#0c0c24] flex flex-col lg:flex-row -mx-4">
+      <div className=" mx-auto px-8 pt-16">
+        <div className="bg-[#0c0c24] flex flex-col lg:flex-row gap-8 ">
           <div className="w-full lg:w-1/2  mb-8 lg:mb-0">
             <div className="bg-[#1e1e26] border border-[rgb(77,76,90)] rounded-lg shadow-md p-6 sm:p-8">
               <h2 className="text-white text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Informations de contact</h2>
