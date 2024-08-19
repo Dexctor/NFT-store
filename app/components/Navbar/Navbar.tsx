@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,7 +41,52 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    console.log("Stored username:", storedUsername); // Log de débogage
+    setUsername(storedUsername);
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedUsername = localStorage.getItem('username');
+      console.log("Storage changed. New username:", storedUsername);
+      setUsername(storedUsername);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    handleStorageChange(); // Check initial state
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
+    setUsername(null);
+    console.log("Logged out. Username cleared.");
+    window.location.reload(); // Force le rechargement de la page
+  };
+
   const renderConnectionButton = () => {
+    console.log("Rendering connection button. Username:", username); // Log de débogage
+    if (username) {
+      return (
+        <div className="flex items-center space-x-2">
+          <Link href="/dashboard" className="text-white bg-gray-800 px-4 py-1 rounded-md capitalize hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out ">
+            {username}
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center space-x-2 border border-white rounded-lg px-4 py-2 hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out"
+          >
+            <span className="text-white">Se déconnecter</span>
+          </button>
+        </div>
+      );
+    }
     return (
       <Link href="/connecte-wallet" className="flex items-center space-x-2 border border-white rounded-lg px-4 py-2 hover:bg-indigo-600 hover:border-indigo-600 transition duration-200 ease-in-out">
         <svg
@@ -98,7 +144,19 @@ const Navbar = () => {
           <Link href="/support" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
             Support
           </Link>
-          {renderConnectionButton()}
+          {username ? (
+            <>
+              <span className="block px-4 py-2 text-white">{username}</span>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-4 py-2 text-[#BABABA] hover:bg-indigo-600"
+              >
+                Se déconnecter
+              </button>
+            </>
+          ) : (
+            renderConnectionButton()
+          )}
         </div>
       )}
     </div>

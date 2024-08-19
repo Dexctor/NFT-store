@@ -1,12 +1,39 @@
 "use client";
 import Breadcrumbs from "../components/breadcums/breadcum";
 import { useState } from "react";
+import { nftService } from "../services/nftService";
+import { useRouter } from 'next/navigation';
 
 export default function CreateItemPage() {
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const router = useRouter();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedFiles(event.target.files);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedFiles && selectedFiles.length > 0) {
+      const file = selectedFiles[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const username = localStorage.getItem('username') || 'unknown';
+        const newNFT = nftService.createNFT({
+          title,
+          description,
+          price,
+          image: reader.result as string,
+          owner: username
+        });
+        console.log('NFT créé:', newNFT);
+        router.push('/dashboard');
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -15,7 +42,7 @@ export default function CreateItemPage() {
         <Breadcrumbs />
 
         <div className="bg-[#1d1d29] p-4 mb-16 sm:p-8 rounded-lg mt-4 sm:mt-8">
-          <form className="space-y-4 sm:space-y-6">
+          <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
             <div className="flex flex-col sm:flex-row flex-wrap -mx-2 sm:-mx-4">
               <div className="w-full sm:w-full md:w-1/2 px-2 sm:px-4 mb-4 sm:mb-0">
                 <div className="bg-[#353444] p-4 sm:p-6 rounded-lg h-auto sm:h-600 border-dashed border border-gray-300">
@@ -102,8 +129,11 @@ export default function CreateItemPage() {
                     type="text"
                     id="title"
                     name="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter item title"
                     className="w-full bg-[#353444] text-white p-3 rounded-lg"
+                    required
                   />
                 </div>
                 <div className="mt-4">
@@ -116,6 +146,8 @@ export default function CreateItemPage() {
                   <textarea
                     id="description"
                     name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     rows={4}
                     placeholder="Type item description"
                     className="w-full bg-[#353444] text-white p-3 rounded-lg"
@@ -129,8 +161,11 @@ export default function CreateItemPage() {
                     type="text"
                     id="price"
                     name="price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     placeholder="10 ETH"
                     className="w-full bg-[#353444] text-white p-3 rounded-lg"
+                    required
                   />
                 </div>
 
@@ -204,7 +239,7 @@ export default function CreateItemPage() {
 
                 <div className="mt-6 sm:mt-8 flex justify-center">
                   <button
-                    type="button"
+                    type="submit"
                     className="w-full sm:w-auto bg-[#5D3EFF] text-white py-3 px-6 rounded-lg hover:bg-indigo-600 transition"
                   >
                     Create Item

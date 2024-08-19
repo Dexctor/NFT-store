@@ -1,7 +1,83 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+"use client"
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
-export default function SignUp() {
+export default function SignIn() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password: '',
+    rememberMe: false
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = () => {
+    const token = localStorage.getItem('authToken');
+    setIsAuthenticated(!!token);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || "Une erreur est survenue lors de l'inscription");
+      }
+
+      // Stockez le token et le nom d'utilisateur
+      localStorage.setItem('authToken', data.token || 'dummy_token');
+      localStorage.setItem('username', formData.username);
+      console.log("Stored username:", formData.username); // Log de débogage
+
+      setIsAuthenticated(true);
+
+      // Afficher un message de succès
+      setError(''); // Effacer les erreurs précédentes
+      const successMessage = "Inscription réussie ! Redirection...";
+      setError(successMessage);
+
+      console.log("Inscription réussie:", data);
+      // Attendre un peu avant de rediriger pour que l'utilisateur puisse voir le message
+      setTimeout(() => {
+        window.location.reload(); // Force le rechargement de la page
+      }, 2000);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Une erreur inattendue est survenue");
+      }
+      console.error("Erreur lors de l'inscription:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section
       className="relative overflow-hidden bg-cover bg-top bg-no-repeat pt-[150px] pb-24"
@@ -16,15 +92,21 @@ export default function SignUp() {
       ></div>
 
       <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-[500px] rounded-lg bg-[#2C2C39] p-8 sm:p-[60px]">
+        <div className="mx-auto max-w-[500px] rounded-lg bg-[#2C2C39]  p-8 sm:p-[60px]">
           <div className="mb-10 text-center">
             <h1 className="mb-2 text-3xl font-bold text-white sm:text-4xl">
-              Sign In Now
+              S'inscrire maintenant
             </h1>
             <p className="text-base font-medium text-[#A1A0AE]">
-              Login to your account for a faster checkout.
+              Créez votre compte ou connectez-vous avec les réseaux sociaux.
             </p>
           </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-500 text-white rounded">
+              {error}
+            </div>
+          )}
 
           <div className="mb-9 flex items-center justify-center space-x-4">
             <button className="flex h-11 w-11 items-center justify-center rounded-md border border-[#4D4C5A] bg-[#353544] hover:border-white hover:bg-white">
@@ -35,7 +117,7 @@ export default function SignUp() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_59_460)">
+                <g clipPath="url(#clip0_59_460)">
                   <path
                     d="M20.2522 10.7169C20.264 10.0466 20.1934 9.37738 20.0419 8.72363H10.7012V12.3419H16.1841C16.0802 12.9763 15.8465 13.5836 15.497 14.1272C15.1474 14.6708 14.6893 15.1396 14.1501 15.5052L14.131 15.6264L17.0846 17.8686L17.2891 17.8886C19.1682 16.1878 20.2518 13.6852 20.2518 10.7169"
                     fill="#4285F4"
@@ -73,7 +155,7 @@ export default function SignUp() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_59_456)">
+                <g clipPath="url(#clip0_59_456)">
                   <path
                     d="M6.32902 20.2481V11.3552H9.20362L9.63399 7.88957H6.32902V5.67683C6.32902 4.67346 6.59737 3.9896 7.98313 3.9896L9.75049 3.98875V0.889099C9.44469 0.847017 8.39564 0.752686 7.17516 0.752686C4.62703 0.752686 2.88252 2.36771 2.88252 5.33377V7.88966H0.000488281V11.3553H2.88243V20.2482L6.32902 20.2481Z"
                     fill="#0080FF"
@@ -99,7 +181,7 @@ export default function SignUp() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_59_452)">
+                <g clipPath="url(#clip0_59_452)">
                   <path
                     d="M25.249 3.05699C24.318 3.45078 23.3334 3.7125 22.3254 3.8341C23.3877 3.22292 24.1819 2.25512 24.5574 1.11408C23.5631 1.68596 22.4752 2.08873 21.3408 2.30497C20.6451 1.58418 19.7419 1.08302 18.7485 0.866664C17.7551 0.650309 16.7176 0.728762 15.7709 1.09182C14.8241 1.45488 14.0119 2.08576 13.4398 2.90242C12.8678 3.71908 12.5623 4.68375 12.5632 5.67101C12.5593 6.04774 12.5987 6.42372 12.6808 6.79197C10.6622 6.696 8.68727 6.188 6.88505 5.30117C5.08283 4.41435 3.49392 3.16866 2.22219 1.64556C1.56927 2.72792 1.36694 4.0111 1.65648 5.23321C1.94603 6.45531 2.70563 7.52418 3.78024 8.22167C2.97741 8.20064 2.19156 7.99278 1.48889 7.61563V7.66924C1.49021 8.80546 1.89517 9.90655 2.6356 10.7872C3.37603 11.6678 4.40671 12.2742 5.55417 12.5042C5.12007 12.6152 4.67269 12.6697 4.22379 12.6663C3.90145 12.6718 3.57943 12.6436 3.26332 12.5822C3.59125 13.5587 4.22327 14.4126 5.07236 15.0264C5.92145 15.6402 6.94586 15.9837 8.00459 16.0096C6.20857 17.3716 3.99357 18.1105 1.71355 18.1083C1.30763 18.1109 0.90196 18.0882 0.499023 18.0405C2.81914 19.4903 5.5227 20.2572 8.28278 20.2486C17.6196 20.2486 22.7245 12.7486 22.7245 6.24757C22.7245 6.02996 22.7167 5.82015 22.7059 5.61155C23.7067 4.91703 24.5685 4.05134 25.249 3.05699Z"
                     fill="#03A9F4"
@@ -122,66 +204,110 @@ export default function SignUp() {
           <div className="relative mb-8 flex items-center justify-center">
             <span className="absolute top-1/2 left-0 h-[1px] w-full bg-[#4D4C5A] opacity-20"></span>
             <p className="relative bg-[#2C2C39] px-5 text-base font-medium text-[#A1A0AE]">
-              Or, sign in with your email
+              Ou, inscrivez-vous avec votre email
             </p>
           </div>
 
-          <form>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-2 block text-base font-medium text-white"
+          {isAuthenticated ? (
+            <div className="text-center text-white">
+              <p>Vous êtes connecté !</p>
+              <button 
+                onClick={() => {
+                  localStorage.removeItem('authToken');
+                  localStorage.removeItem('username');
+                  setIsAuthenticated(false);
+                }}
+                className="mt-4 bg-[#5142FC] py-2 px-4 rounded"
               >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Entrez votre email"
-                className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
-              />
+                Se déconnecter
+              </button>
             </div>
-            <div className="mb-5">
-              <label
-                htmlFor="password"
-                className="mb-2 block text-base font-medium text-white"
-              >
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Entrez votre mot de passe"
-                className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-8 flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="checkboxLabelOne"
-                  className="h-5 w-5 rounded"
-                />
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="mb-5">
                 <label
-                  htmlFor="checkboxLabelOne"
-                  className="ml-3 cursor-select-none text-base font-medium text-[#A1A0AE]"
+                  htmlFor="email"
+                  className="mb-2 block text-base font-medium text-white"
                 >
-                  Rester connecté
+                  Email
                 </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Entrez votre email"
+                  className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
+                />
               </div>
-              <a
-                href="#"
-                className="text-base font-medium text-[#A1A0AE] hover:text-[#5142FC]"
+              <div className="mb-5">
+                <label
+                  htmlFor="username"
+                  className="mb-2 block text-base font-medium text-white"
+                >
+                  Nom d'utilisateur
+                </label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="Entrez votre nom d'utilisateur"
+                  className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
+                />
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="password"
+                  className="mb-2 block text-base font-medium text-white"
+                >
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Entrez votre mot de passe"
+                  className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
+                />
+              </div>
+              <div className="mb-8 flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    name="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    className="h-5 w-5 rounded"
+                  />
+                  <label
+                    htmlFor="rememberMe"
+                    className="ml-3 cursor-select-none text-base font-medium text-[#A1A0AE]"
+                  >
+                    Rester connecté
+                  </label>
+                </div>
+                <a
+                  href="#"
+                  className="text-base font-medium text-[#A1A0AE] hover:text-[#5142FC]"
+                >
+                  Mot de passe oublié ?
+                </a>
+              </div>
+              <button 
+                type="submit" 
+                className="w-full rounded-md bg-[#5142FC] py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-90"
+                disabled={isLoading}
               >
-                Mot de passe oublié ?
-              </a>
-            </div>
-            <button className="w-full rounded-md bg-[#5142FC] py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-90">
-              S'inscrire
-            </button>
-          </form>
+                {isLoading ? 'Inscription en cours...' : 'S\'inscrire'}
+              </button>
+            </form>
+          )}
 
           <p className="mt-6 text-center text-base font-medium text-[#A1A0AE]">
             Vous avez déjà un compte ?
