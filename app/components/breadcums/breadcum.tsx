@@ -8,7 +8,7 @@ export default function Breadcrumbs() {
   const pathnames = pathname.split("/").filter((x) => x);
 
   return (
-    <section className="pt-32 pb-5">
+    <section className="pt-32 pb-5 px-4">
       <div className="container mx-auto px-8 rounded-lg py-5 bg-[#2c2c39] border-2 border-[rgb(77,76,90)]">
         {" "}
         {/* Centrer dans le conteneur */}

@@ -67,14 +67,14 @@ export default function ExplorePage() {
     <main className="bg-[#0c0c24]">
       <Breadcrumbs />
       <div className="bg-[#0c0c24]">
-        <div className="container mx-auto pb-16 pt-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-20">
           <div className="w-full">
             <div className="container mx-auto border-2 border-[rgb(77,76,90)] rounded-md">
-              <div className="flex justify-between py-4 px-5 font-semibold">
-                <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row justify-between py-4 px-5 font-semibold">
+                <div className="flex flex-wrap gap-2 mb-4 sm:mb-0">
                   {renderButtons(categories)}
                 </div>
-                <div className="flex space-x-4 bg-[#0c0c24] ">
+                <div className="flex flex-col sm:flex-row gap-4 bg-[#0c0c24]">
                   {renderSelect(categories, "All Artworks")}
                   {renderSelect(sortOptions, "Sort By")}
                 </div>
@@ -82,7 +82,7 @@ export default function ExplorePage() {
             </div>
 
             {/* Cards Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-16">
               {picks.map((pick) => (
                 <div
                   key={pick.id}

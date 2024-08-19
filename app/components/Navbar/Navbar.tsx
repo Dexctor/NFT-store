@@ -7,6 +7,7 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
@@ -61,20 +62,62 @@ const Navbar = () => {
     )
   }
 
+  const renderMobileMenu = () => (
+    <div className="lg:hidden">
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="text-white focus:outline-none"
+      >
+        <svg
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+      </button>
+
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-[#1D2144] py-2">
+          <Link href="/" className="block px-4 py-2 text-white hover:bg-indigo-600">
+            Home
+          </Link>
+          <Link href="/explore" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
+            Explore
+          </Link>
+          <Link href="https://discord.com/invite/SxNNgXBAQS" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
+            Community
+          </Link>
+          <Link href="/support" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
+            Support
+          </Link>
+          {renderConnectionButton()}
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <nav
-      className={`fixed w-full z-50 flex items-center justify-between px-10 py-2 transition-colors duration-300 ${
+      className={`fixed w-full z-50 flex items-center justify-between px-4 lg:px-10 py-2 transition-colors duration-300 ${
         isScrolled ? "bg-[#1D2144] bg-opacity-70 backdrop-blur-sm text-white" : "bg-transparent text-gray-800"
       }`}
     >
       {/* Logo and NFT Text */}
       <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="Logo" className="h-14 w-14" />
-        <span className="font-bold text-3xl text-white">NFT</span>
+        <img src="/logo.png" alt="Logo" className="h-10 w-10 lg:h-14 lg:w-14" />
+        <span className="font-bold text-2xl lg:text-3xl text-white">NFT</span>
       </div>
 
-      {/* Navigation Menu */}
-      <div className="flex items-center space-x-8">
+      {/* Navigation Menu - Desktop */}
+      <div className="hidden lg:flex items-center space-x-8">
         <Link href="/" className={`text-white hover:text-gray-300`}>
           Home
         </Link>
@@ -147,8 +190,8 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Search and Wallet Connect */}
-      <div className="flex items-center space-x-4">
+      {/* Search and Wallet Connect - Desktop */}
+      <div className="hidden lg:flex items-center space-x-4">
         <div className="relative">
           <button
             onClick={() => setSearchOpen(!searchOpen)}
@@ -179,6 +222,9 @@ const Navbar = () => {
         </div>
         {renderConnectionButton()}
       </div>
+
+      {/* Mobile Menu */}
+      {renderMobileMenu()}
     </nav>
   );
 };

@@ -10,15 +10,15 @@ export default function CreateItemPage() {
   };
 
   return (
-    <section className="py-8 px-4 bg-[#2c2c39]">
+    <section className="py-4 sm:py-8 px-2 sm:px-4 bg-[#0c0c24]">
       <div className="container mx-auto">
         <Breadcrumbs />
 
-        <div className="bg-[#1e1e26] p-8 rounded-lg mt-8">
-          <form className="space-y-6">
-            <div className="flex flex-wrap -mx-4">
-              <div className="w-full md:w-1/2 px-4">
-                <div className="bg-[#353444] p-6 rounded-lg h-600 border-dashed border border-gray-300">
+        <div className="bg-[#1d1d29] p-4 mb-16 sm:p-8 rounded-lg mt-4 sm:mt-8">
+          <form className="space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row flex-wrap -mx-2 sm:-mx-4">
+              <div className="w-full sm:w-full md:w-1/2 px-2 sm:px-4 mb-4 sm:mb-0">
+                <div className="bg-[#353444] p-4 sm:p-6 rounded-lg h-auto sm:h-600 border-dashed border border-gray-300">
                   <input
                     type="file"
                     name="file"
@@ -93,7 +93,7 @@ export default function CreateItemPage() {
                 </div>
               </div>
 
-              <div className="w-full md:w-1/2 px-4">
+              <div className="w-full sm:w-full md:w-1/2 px-2 sm:px-4">
                 <div>
                   <label htmlFor="title" className="block text-white mb-2">
                     Title
@@ -134,7 +134,7 @@ export default function CreateItemPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
                     <label
                       htmlFor="royalties"
@@ -164,14 +164,14 @@ export default function CreateItemPage() {
                   </div>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-6 sm:mt-8">
                   <p className="text-white font-semibold">
                     Time Auctions{" "}
                     <span className="text-gray-400">(optional)</span>
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
                     <label
                       htmlFor="startDate"
@@ -202,10 +202,10 @@ export default function CreateItemPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex justify-center">
+                <div className="mt-6 sm:mt-8 flex justify-center">
                   <button
                     type="button"
-                    className="bg-[#5D3EFF] text-white py-3 px-6 rounded-lg hover:bg-indigo-600 transition"
+                    className="w-full sm:w-auto bg-[#5D3EFF] text-white py-3 px-6 rounded-lg hover:bg-indigo-600 transition"
                   >
                     Create Item
                   </button>
