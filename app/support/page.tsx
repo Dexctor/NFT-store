@@ -26,7 +26,7 @@ const SupportPage = () => {
               </div>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 px-4">
+          <div className="w-full lg:w-1/2 ">
             <div className="bg-[#1e1e26] border-[rgb(77,76,90)] border rounded-lg shadow-md p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl text-white font-bold mb-4 sm:mb-6">Contactez-nous</h2>
               <p className="text-gray-400 mb-8">
