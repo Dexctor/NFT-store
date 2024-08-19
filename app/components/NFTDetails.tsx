@@ -17,6 +17,7 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
             width={500}
             height={500}
             className="rounded-lg object-cover w-full h-full"
+            priority
           />
         </div>
       </div>
@@ -45,19 +46,23 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
             </button>
           </div>
           <div className="mb-9 flex flex-wrap">
-            <div className="mb-3.5 flex items-center border-b border-gray-700 pb-4 md:pb-0 md:pr-8">
-              <div className="mr-2.5 h-11 w-11">
-                <Image
-                  src={nft.ownerImage}
-                  alt="Propriétaire"
-                  width={40}
-                  height={40}
-                  className="rounded-lg object-cover"
-                />
+            <div className=" flex items-center  ">
+              <div className="mr-2.5  w-11">
+                {nft.creatorImage ? (
+                  <Image
+                    src={nft.creatorImage}
+                    alt="Propriétaire"
+                    width={40}
+                    height={40}
+                    className="rounded-lg object-cover"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-gray-300 rounded-lg"></div>
+                )}
               </div>
               <div>
                 <h3 className="text-white text-sm font-semibold">
-                  @{nft.owner}
+                  @{nft.creator}
                   <span className="block text-xs font-medium text-gray-500">
                     Propriétaire
                   </span>
@@ -66,13 +71,17 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
             </div>
             <div className="flex items-center pl-8">
               <div className="mr-2.5 h-11 w-11">
-                <Image
-                  src={nft.creatorImage}
-                  alt="Créateur"
-                  width={40}
-                  height={40}
-                  className="rounded-lg object-cover"
-                />
+                {nft.creatorImage ? (
+                  <Image
+                    src={nft.creatorImage}
+                    alt="Créateur"
+                    width={40}
+                    height={40}
+                    className="rounded-lg object-cover"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-gray-300 rounded-lg"></div>
+                )}
               </div>
               <div>
                 <h3 className="text-white text-sm font-semibold">
@@ -87,10 +96,10 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
           <div className="mb-6">
             <p className="text-gray-300">{nft.description}</p>
           </div>
-          <div className="bg-gray-800 p-6 rounded-md mb-6 border border-gray-700 flex flex-wrap items-center justify-between ">
-            <div className="w-full md:w-1/2 mb-4 md:mb-0">
+          <div className="bg-gray-800  rounded-md mb-6 border border-gray-700 flex flex-wrap items-center justify-between ">
+            <div className="w-full md:w-1/2  ">
 
-              <div className="space-y-2">
+              <div className="space-y-2 p-6">
                 <div className="flex flex-row items-center">
                   <p className="text-gray-400 text-base font-semibold pr-1">Artiste :</p>
                   <p className="text-white font-semibold">
@@ -107,7 +116,7 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-1/2 text-center flex flex-col items-center gap-6 ">
+            <div className="w-full md:w-1/2 text-center flex flex-col items-center gap-6 p-6 border-l border-gray-700">
               <div className="space-y-2 flex items-baseline flex-row">
                 <p className="text-gray-400 text-base pr-1 font-semibold ">Current Bid :</p>
                 <p className="text-white font-semibold text-base">{nft.currentBid} ETH</p>
@@ -156,11 +165,61 @@ export function NFTDetails({ nft }: NFTDetailsProps) {
                   <span className="text-gray-400 text-xs">= $12,246</span>
                 </div>
               </div>
+              <div className="flex justify-between items-center ">
+                <div className="flex items-center ">
+                  <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
+                    <Image
+                      src={nft.imageCreator}
+                      alt="Bidder"
+                      width={32}
+                      height={32}
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-semibold">
+                      @Bidder_Name
+                    </h4>
+                    <span className="text-gray-400 text-xs">
+                      Il y a 5 heures
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <h5 className="text-white text-sm font-semibold">4.75 ETH</h5>
+                  <span className="text-gray-400 text-xs">= $12,246</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center ">
+                <div className="flex items-center ">
+                  <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
+                    <Image
+                      src={nft.imageCreator}
+                      alt="Bidder"
+                      width={32}
+                      height={32}
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-semibold">
+                      @Bidder_Name
+                    </h4>
+                    <span className="text-gray-400 text-xs">
+                      Il y a 5 heures
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <h5 className="text-white text-sm font-semibold">4.75 ETH</h5>
+                  <span className="text-gray-400 text-xs">= $12,246</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="mt-8 flex justify-center">
-            <button className="bg-[#5D3EFF] text-white py-3 px-6 rounded-lg hover:bg-indigo-600 transition">
-              Placer une enchère
+            <button className="bg-[#5D3EFF] w-full text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-600 transition">
+              Place Bid
             </button>
           </div>
         </div>

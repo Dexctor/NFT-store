@@ -18,7 +18,7 @@ export default function CreateItemPage() {
           <form className="space-y-6">
             <div className="flex flex-wrap -mx-4">
               <div className="w-full md:w-1/2 px-4">
-                <div className="bg-[#353444] p-6 rounded-lg">
+                <div className="bg-[#353444] p-6 rounded-lg h-600 border-dashed border border-gray-300">
                   <input
                     type="file"
                     name="file"
@@ -28,19 +28,23 @@ export default function CreateItemPage() {
                   />
                   <label
                     htmlFor="file"
-                    className="flex flex-col items-center justify-center bg-[#4d4c5a] h-48 rounded-lg cursor-pointer"
+                    className="flex flex-col items-center justify-center bg-[#4d4c5a] h-550 rounded-lg cursor-pointer h"
                   >
                     <svg
-                      width="80"
-                      height="80"
-                      viewBox="0 0 80 80"
-                      className="text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="size-20 text-gray-500"
                     >
                       <path
-                        d="M28.3333 45L36.6667 55L48.3333 40L63.3333 60H16.6667L28.3333 45ZM70 63.3333V16.6667C70 12.9667 67 10 63.3333 10H16.6667C14.8986 10 13.2029 10.7024 11.9526 11.9526C10.7024 13.2029 10 14.8986 10 16.6667V63.3333C10 65.1014 10.7024 66.7971 11.9526 68.0474C13.2029 69.2976 14.8986 70 16.6667 70H63.3333C65.1014 70 66.7971 69.2976 68.0474 68.0474C69.2976 66.7971 70 65.1014 70 63.3333Z"
-                        fill="#4D4C5A"
-                      ></path>
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                      />
                     </svg>
+
                     <span className="mt-2 text-lg text-white">
                       Drop files here
                     </span>
@@ -48,7 +52,7 @@ export default function CreateItemPage() {
                       PNG, JPG, GIF, WEBP or MP4. Max 200mb.
                     </span>
                     <span className="text-blue-500 mt-2">Or choose a file</span>
-                    <span className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
+                    <span className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-lg">
                       Browse
                     </span>
                   </label>

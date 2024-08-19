@@ -19,3 +19,11 @@
 main,body {
   background-color: #0c0c24;
 }
+
+.h-600{
+  height: 600px;
+}
+
+.h-550{
+  height: 550px;
+}
