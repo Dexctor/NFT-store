@@ -1,4 +1,4 @@
-import picksData from '../components/data/picksData.json';
+import picksData from '../app/components/data/picksData.json';
 
 export interface Pick {
   id: number;

@@ -1,4 +1,5 @@
-import Image from 'next/image';
+
+
 import Breadcrumbs from '@/app/components/breadcums/breadcum';
 import { getNFTById } from '@/lib/nft';
 import { NFTDetails } from '@/app/components/NFTDetails';

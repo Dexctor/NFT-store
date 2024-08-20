@@ -7,7 +7,7 @@ let client;
 let clientPromise: Promise<MongoClient>;
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Veuillez ajouter votre URI Mongo à votre fichier .env.local');
+  throw new Error('Ajoutez votre URI Mongo à .env.local');
 }
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;

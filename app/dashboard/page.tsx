@@ -28,6 +28,11 @@ export default function Dashboard() {
     console.log(`Suppression du NFT avec l'ID: ${nftId}`);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    router.push('/signIn');
+  };
+
   if (!username) {
     return <div>Chargement...</div>;
   }
@@ -70,6 +75,7 @@ export default function Dashboard() {
           <p className='hover:text-gray-400'>Aucune activité récente à afficher.</p>
         </div>
       </div>
+      <button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Se déconnecter</button>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+
 import Image from "next/image";
-import { NFT } from "@/lib/nft";
+import { NFT } from "@/app/lib/nft";
 
 interface NFTDetailsProps {
   nft: NFT;
