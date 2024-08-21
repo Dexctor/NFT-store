@@ -22,7 +22,10 @@ export async function POST(req: Request) {
     }
 
     const token = sign({ userId: user._id.toString() }, process.env.JWT_SECRET!, { expiresIn: '1h' });
-    const response = NextResponse.json({ user: { id: user._id.toString(), email: user.email, username: user.username } });
+    const response = NextResponse.json({ 
+      user: { id: user._id.toString(), email: user.email, username: user.username },
+      redirectUrl: '/dashboard'
+    });
     
     response.cookies.set('token', token, {
       httpOnly: true,

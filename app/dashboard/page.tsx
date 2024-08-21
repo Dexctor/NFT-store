@@ -6,22 +6,27 @@ import { nftService } from '../services/nftService';
 import Breadcums from '../components/breadcums/breadcum'
 import Link from 'next/link';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store'; // Added this line to import RootState
 
 export default function Dashboard() {
   const [username, setUsername] = useState<string | null>(null);
   const [nfts, setNfts] = useState<any[]>([]);
   const router = useRouter();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated); // Using RootState here
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    if (!storedUsername) {
+    if (!isAuthenticated) {
       router.push('/signIn');
     } else {
-      setUsername(storedUsername);
-      const userNFTs = nftService.getNFTsByOwner(storedUsername);
-      setNfts(userNFTs);
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        setUsername(storedUsername);
+        const userNFTs = nftService.getNFTsByOwner(storedUsername);
+        setNfts(userNFTs);
+      }
     }
-  }, [router]);
+  }, [router, isAuthenticated]);
 
   const handleDeleteNFT = (nftId: string) => {
     // Logique pour supprimer le NFT
@@ -33,7 +38,7 @@ export default function Dashboard() {
     router.push('/signIn');
   };
 
-  if (!username) {
+  if (!isAuthenticated) {
     return <div>Chargement...</div>;
   }
 

@@ -2,8 +2,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
+import { signOut } from '../../../store/authSlice';
 
 const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -13,6 +14,10 @@ const Navbar = () => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const handleSignOut = () => {
+    dispatch(signOut() as any);
+  };
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 0);
@@ -202,10 +207,12 @@ const Navbar = () => {
         </div>
         
         {isAuthenticated ? (
-          <div className="text-white">Bienvenue, {user?.username}</div>
+          <button onClick={handleSignOut} className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
+            <span>Se déconnecter</span>
+          </button>
         ) : (
           <button className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
-            <span>Connect Wallet</span>
+            <span>Se connecter</span>
           </button>
         )}
       </div>
