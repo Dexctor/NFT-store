@@ -64,8 +64,9 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthenticated = true;
         state.loading = false;
-        console.log("État mis à jour après connexion:", state);
-        localStorage.setItem('username', action.payload.username);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('username', action.payload.username);
+        }
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;

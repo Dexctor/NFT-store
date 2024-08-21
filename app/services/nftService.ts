@@ -21,6 +21,18 @@ interface NFT {
       return this.nfts.filter(nft => nft.owner === owner);
     }
   
+    deleteNFT(id: string): boolean {
+      const initialLength = this.nfts.length;
+      this.nfts = this.nfts.filter(nft => nft.id !== id);
+      
+      if (this.nfts.length < initialLength) {
+        this.saveNFTs();
+        return true;
+      }
+      
+      return false;
+    }
+  
     private saveNFTs() {
       localStorage.setItem('nfts', JSON.stringify(this.nfts));
     }

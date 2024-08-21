@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { verify, JwtPayload } from 'jsonwebtoken';
-import clientPromise from '@/lib/mongodb';
 import { cookies } from 'next/headers';
+import { verifyToken } from '@/app/utils/auth';
+import { getUserById } from '@/app/services/userService';
 
 export async function GET(req: Request) {
   const cookieStore = cookies();
@@ -12,18 +12,8 @@ export async function GET(req: Request) {
   }
 
   try {
-    const decoded = verify(token, process.env.JWT_SECRET!);
-
-    // Vérifiez si decoded est un JwtPayload et non une chaîne de caractères
-    if (typeof decoded === 'string' || !('userId' in decoded)) {
-      return NextResponse.json({ error: 'Token invalide' }, { status: 401 });
-    }
-
-    const client = await clientPromise;
-    const db = client.db("nft_store");
-    const usersCollection = db.collection("users");
-
-    const user = await usersCollection.findOne({ _id: decoded.userId });
+    const decoded = verifyToken(token);
+    const user = await getUserById(decoded.userId);
 
     if (!user) {
       return NextResponse.json({ error: 'Utilisateur non trouvé' }, { status: 404 });

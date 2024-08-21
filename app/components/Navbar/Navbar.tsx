@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -7,7 +8,6 @@ import { RootState } from '@/store/store';
 import { signOut } from '../../../store/authSlice';
 
 const Navbar = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -84,6 +84,11 @@ const Navbar = () => {
           <Link href="/support" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
             Support
           </Link>
+          {isAuthenticated && (
+            <Link href="/dashboard" className="block px-4 py-2 text-[#BABABA] hover:bg-indigo-600">
+              Dashboard
+            </Link>
+          )}
         </div>
       )}
     </div>
@@ -156,16 +161,6 @@ const Navbar = () => {
               <Link href="/connect-wallet" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
                 Connect Wallet
               </Link>
-              <Link href="/support" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
-                Support
-              </Link>
-              <hr className="my-2 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-              <Link href="/signUp" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
-                Sign Up Page
-              </Link>
-              <Link href="/signIn" className="block px-4 py-2.5 text-[#BABABA] text-sm hover:text-white">
-                Sign In Page
-              </Link>
             </div>
           )}
         </div>
@@ -177,43 +172,26 @@ const Navbar = () => {
 
       {/* Search and Wallet - Desktop */}
       <div className="hidden lg:flex items-center space-x-4">
-        <div className="relative">
-          <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="focus:outline-none"
-          >
-            <svg
-              className="h-6 w-6 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
-              ></path>
-            </svg>
-          </button>
-          {searchOpen && (
-            <input
-              type="text"
-              className="absolute top-0 left-8 bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"
-              placeholder="Search..."
-            />
-          )}
-        </div>
-        
         {isAuthenticated ? (
-          <button onClick={handleSignOut} className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
-            <span>Se déconnecter</span>
-          </button>
+          <>
+            <Link href="/dashboard" className="text-white hover:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </Link>
+            <button onClick={handleSignOut} className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
+              <span>Se déconnecter</span>
+            </button>
+          </>
         ) : (
-          <button className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
-            <span>Se connecter</span>
-          </button>
+          <>
+            <Link href="/signIn" className="bg-[#5142FC] hover:bg-[#4134d6] text-white font-semibold py-2 px-4 rounded">
+              Se connecter
+            </Link>
+            <Link href="/signUp" className="bg-transparent hover:bg-[#5142FC] text-white font-bold py-2 px-4 border border-white hover:border-[#5142FC] rounded transition delay-100 ease-in-out">
+              S'inscrire
+            </Link>
+          </>
         )}
       </div>
 

@@ -61,7 +61,7 @@ export default function SignUp() {
 
   return (
     <section
-      className="relative overflow-hidden bg-cover bg-top bg-no-repeat pt-[150px] pb-24"
+      className="relative overflow-hidden bg-cover bg-top bg-no-repeat pt-[150px] pb-24 bg-[#0c0c24]"
     
     >
       <div

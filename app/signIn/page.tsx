@@ -23,7 +23,7 @@ export default function SignIn() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-cover bg-top bg-no-repeat pt-[150px] pb-24">
+    <section className="relative overflow-hidden bg-cover bg-top bg-no-repeat pt-[150px] pb-24 bg-[#0c0c24]">
       <div className="absolute top-0 left-0 z-[-10] h-full w-full" style={{
         background: "linear-gradient(180deg, rgba(20, 20, 32, 0.65) 0%, #141420 100%)"
       }}></div>
@@ -48,6 +48,7 @@ export default function SignIn() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Entrez votre email" 
+                autoComplete="username"
                 className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md" 
               />
             </div>
@@ -62,6 +63,7 @@ export default function SignIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Entrez votre mot de passe" 
+                autoComplete="current-password"
                 className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md" 
               />
             </div>
@@ -72,8 +74,13 @@ export default function SignIn() {
             )}
             <div className="mb-8 flex items-center justify-between">
               <div className="flex items-center">
-                <input type="checkbox" id="checkboxLabelOne" className="h-5 w-5 rounded" />
-                <label htmlFor="checkboxLabelOne" className="ml-3 cursor-select-none text-base font-medium text-[#A1A0AE]">
+                <input 
+                  type="checkbox" 
+                  id="rememberMe" 
+                  name="rememberMe"
+                  className="h-5 w-5 rounded" 
+                />
+                <label htmlFor="rememberMe" className="ml-3 cursor-select-none text-base font-medium text-[#A1A0AE]">
                   Rester connecté
                 </label>
               </div>
@@ -92,7 +99,7 @@ export default function SignIn() {
           
           <p className="mt-6 text-center text-base font-medium text-[#A1A0AE]">
             Vous n'avez pas de compte ?
-            <a href="/signup" className="text-white hover:text-[#5142FC]">
+            <a href="/signup" className="text-white hover:text-[#5142FC] ml-4">
               S'inscrire
             </a>
           </p>
