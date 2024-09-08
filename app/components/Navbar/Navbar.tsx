@@ -3,9 +3,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store/store';
-import { signOut } from '../../../store/authSlice';
+import { FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { useSession, signOut } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { signOutUser } from '@/store/authSlice';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,11 +14,15 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  const { data: session } = useSession();
   const dispatch = useDispatch();
-  const handleSignOut = () => {
-    dispatch(signOut() as any);
+  const handleSignOut = async () => {
+    await dispatch(signOutUser() as any);
+    signOut({ redirect: false });
   };
+
+  const isAuthenticated = !!session?.user;
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 0);
@@ -175,11 +180,10 @@ const Navbar = () => {
         {isAuthenticated ? (
           <>
             <Link href="/dashboard" className="text-white hover:text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
+              <FaHome className="h-6 w-6" />
             </Link>
             <button onClick={handleSignOut} className="flex items-center space-x-2 bg-[#5142FC] hover:bg-[#4134d6] text-white font-bold py-2 px-4 rounded">
+              <FaSignOutAlt className="h-5 w-5" />
               <span>Se déconnecter</span>
             </button>
           </>

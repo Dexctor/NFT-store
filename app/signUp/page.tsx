@@ -2,12 +2,12 @@
 "use client"
 import React, { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { validateEmail, validatePassword, validateUsername } from '../utils/validation';
+import { signIn } from 'next-auth/react';
+import { validateEmail, validatePassword} from '../utils/validation';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -21,10 +21,6 @@ export default function SignUp() {
       setError('Email invalide');
       return;
     }
-    if (!validateUsername(username)) {
-      setError("Le nom d'utilisateur doit contenir au moins 3 caractères");
-      return;
-    }
     if (!validatePassword(password)) {
       setError('Le mot de passe doit contenir au moins 6 caractères');
       return;
@@ -36,17 +32,24 @@ export default function SignUp() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        // Effacez le localStorage
-        localStorage.clear();
-        // Stockez les nouvelles informations de l'utilisateur
-        localStorage.setItem('username', username);
-        router.push('/dashboard');
+        // Inscription réussie, connectez l'utilisateur
+        const result = await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        });
+
+        if (result?.error) {
+          setError(result.error);
+        } else {
+          router.push('/dashboard');
+        }
       } else {
         setError(data.message || "Une erreur s'est produite lors de l'inscription");
       }
@@ -205,22 +208,8 @@ export default function SignUp() {
                 />
               </div>
               <div className="mb-5">
-                <label
-                  htmlFor="username"
-                  className="mb-2 block text-base font-medium text-white"
-                >
-                  Nom d'utilisateur
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                 
-                  placeholder="Entrez votre nom d'utilisateur"
-                  className="w-full rounded-md border border-[#4D4C5A] bg-[#353544] py-3 px-6 text-base font-medium text-[#A1A0AE] outline-none focus:border-[#5142FC] focus:shadow-md"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
+             
+              
               </div>
               <div className="mb-5 relative">
                 <label

@@ -9,8 +9,8 @@ export function middleware(request: NextRequest) {
   // Liste des chemins publics
   const publicPaths = ['/', '/explore', '/support', '/signIn', '/signUp'];
   
-  // Autoriser l'accès à /explore/[id]
-  if (pathname.startsWith('/explore/')) {
+  // Autoriser l'accès à /explore/[id] et au dashboard
+  if (pathname.startsWith('/explore/') || pathname === '/dashboard') {
     return NextResponse.next();
   }
 
@@ -19,10 +19,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Pour les chemins protégés (comme /create-item)
+  // Pour les chemins protégés
   if (!token && !publicPaths.includes(pathname)) {
     // Rediriger vers la page de connexion
-    return NextResponse.redirect(new URL('/signIn', request.url));
+    return NextResponse.redirect(new URL('/signin', request.url));
   }
 
   // Si un token est présent, laisser passer la requête

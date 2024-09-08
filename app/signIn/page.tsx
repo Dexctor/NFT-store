@@ -1,24 +1,45 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/store/store';
-import { signIn } from '@/store/authSlice';
+import { signIn } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/store';
+import { setUser } from '@/store/authSlice';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { error, loading } = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const resultAction = await dispatch(signIn({ email, password }));
-    if (signIn.fulfilled.match(resultAction)) {
-      router.push('/dashboard');
+    setError('');
+    setLoading(true);
+
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        // Mise à jour du state Redux
+        dispatch(setUser({ email }));
+        router.push('/dashboard');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la connexion:', error);
+      setError('Une erreur est survenue lors de la connexion');
+    } finally {
+      setLoading(false);
     }
   };
 

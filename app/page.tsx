@@ -1,11 +1,15 @@
 "use client"
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import HeroSection from '@components/HeroSection/HeroSection';
-import TopArtists from '@components/TopArtist/TopArtist';
-import LiveAuctions from '@components/LiveAuctions/LiveAuctions';
-import TodaysPick from '@components/TodaysPick/TodaysPick';
-import CoreFeatures from '@components/CoreFeatures/CoreFeatures';
-import PopularCollection from '@components/PopularCollection/PopularCollection';
+import { useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/authSlice';
+import HeroSection from '../app/components/HeroSection/HeroSection';
+import TopArtists from '../app/components/TopArtist/TopArtist';
+import LiveAuctions from '../app/components/LiveAuctions/LiveAuctions';
+import TodaysPick from '../app/components/TodaysPick/TodaysPick';
+import CoreFeatures from '../app/components/CoreFeatures/CoreFeatures';
+import PopularCollection from '../app/components/PopularCollection/PopularCollection';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -17,6 +21,15 @@ const sectionVariants = {
 };
 
 export default function Home() {
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (session?.user) {
+      dispatch(setUser(session.user));
+    }
+  }, [session, dispatch]);
+
   return (
    <main>
     <HeroSection/>
@@ -52,9 +65,7 @@ export default function Home() {
     >
       <CoreFeatures/>
     </motion.div>
-  
-      <PopularCollection/>
-   
+    <PopularCollection/>
    </main>
   );
 }

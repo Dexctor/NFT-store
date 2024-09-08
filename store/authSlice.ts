@@ -1,43 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { signIn, signOut } from 'next-auth/react';
 
-export const signIn = createAsyncThunk(
+export const signInUser = createAsyncThunk(
   'auth/signIn',
   async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
       });
-      if (!response.ok) throw new Error('Échec de la connexion');
-      const data = await response.json();
-      return data.user;
+      if (result?.error) {
+        return rejectWithValue(result.error);
+      }
+      return result;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const signOut = createAsyncThunk('auth/signOut', async () => {
-  await fetch('/api/auth/signout', { method: 'POST' });
+export const signOutUser = createAsyncThunk('auth/signOut', async () => {
+  await signOut({ redirect: false });
 });
 
-export const checkAuth = createAsyncThunk(
-  'auth/checkAuth',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetch('/api/auth/me');
-      if (!response.ok) throw new Error('Non authentifié');
-      const data = await response.json();
-      return data.user;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 interface AuthState {
-  user: { id: string; email: string; username: string } | null;
+  user: { id: string; email: string; name: string } | null;
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
@@ -53,40 +41,33 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = !!action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(signIn.pending, (state) => {
+      .addCase(signInUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signIn.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
+      .addCase(signInUser.fulfilled, (state) => {
         state.loading = false;
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('username', action.payload.username);
-        }
+        state.isAuthenticated = true;
       })
-      .addCase(signIn.rejected, (state, action) => {
+      .addCase(signInUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
-      .addCase(signOut.fulfilled, (state) => {
+      .addCase(signOutUser.fulfilled, (state) => {
         state.user = null;
         state.isAuthenticated = false;
-      })
-      .addCase(checkAuth.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
-        state.loading = false;
-      })
-      .addCase(checkAuth.rejected, (state) => {
-        state.user = null;
-        state.isAuthenticated = false;
-        state.loading = false;
       });
   },
 });
+
+export const { setUser } = authSlice.actions;
 
 export default authSlice.reducer;
